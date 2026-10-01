@@ -1,7 +1,7 @@
 import { DesktopIconItem, HobbyItem, ProjectItem } from '../types';
 
 export const PORTFOLIO_DATA = {
-  name: 'Dev Caio',
+  name: 'Caio Souza',
   title: 'Desenvolvedor Full Stack (Pleno III)',
   company: 'Single Software',
   yearsOfExperience: 8,

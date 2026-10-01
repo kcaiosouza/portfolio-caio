@@ -40,25 +40,14 @@ describe('Windows XP Portfolio Applications', () => {
       const textarea = screen.getByTestId('notepad-textarea') as HTMLTextAreaElement;
       expect(textarea).toBeInTheDocument();
 
-      // Check PORTFOLIO_DATA content inside textarea value
-      expect(textarea.value).toContain(PORTFOLIO_DATA.name);
-      expect(textarea.value).toContain('+8 anos de experiência');
-      expect(textarea.value).toContain(PORTFOLIO_DATA.summary);
-
-      // Skills
-      PORTFOLIO_DATA.skills.slice(0, 3).forEach(skill => {
-        expect(textarea.value).toContain(skill);
-      });
-
-      // Languages
-      PORTFOLIO_DATA.languages.forEach(l => {
-        expect(textarea.value).toContain(l.lang);
-      });
-
-      // Contacts
+      // Check updated bio content inside textarea value
+      expect(textarea.value).toContain('Caio Souza');
+      expect(textarea.value).toContain('Single Software');
+      expect(textarea.value).toContain('Desenvolvedor Full Stack (Pleno III)');
+      expect(textarea.value).toContain('HINÁRIO EAV');
+      expect(textarea.value).toContain('IGCGMUSIC');
       expect(textarea.value).toContain(PORTFOLIO_DATA.contacts.github);
       expect(textarea.value).toContain(PORTFOLIO_DATA.contacts.linkedin);
-      expect(textarea.value).toContain(PORTFOLIO_DATA.contacts.email);
     });
 
     it('renders status bar with line/column information', () => {

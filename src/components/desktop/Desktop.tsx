@@ -11,6 +11,7 @@ import { ProjectsFolderApp } from '../windows/ProjectsFolderApp';
 import { InternetExplorerApp } from '../windows/InternetExplorerApp';
 import { MobileEmulatorApp } from '../windows/MobileEmulatorApp';
 import { ImageViewerApp } from '../windows/ImageViewerApp';
+import { PuppyAssistant } from '../assistant/PuppyAssistant';
 
 export const Desktop: React.FC = () => {
   return (
@@ -74,7 +75,8 @@ export const Desktop: React.FC = () => {
             imageTitle={hobby.title}
             description={hobby.description}
           />
-        ))}
+        {/* Cachorrinho Ajudante do Windows XP */}
+        <PuppyAssistant />
       </div>
 
       {/* Barra de Tarefas */}
