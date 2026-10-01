@@ -11,6 +11,9 @@ interface WindowContextType {
   minimizeWindow: (id: string) => void;
   maximizeWindow: (id: string) => void;
   updateWindowPosition: (id: string, pos: Partial<WindowPosition>) => void;
+  browserUrl: string;
+  setBrowserUrl: (url: string) => void;
+  openBrowser: (url?: string) => void;
 }
 
 const DEFAULT_WINDOWS: WindowItem[] = [
@@ -46,6 +49,28 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 200, y: 80, width: 600, height: 420 },
     defaultPosition: { x: 200, y: 80, width: 600, height: 420 }
+  },
+  {
+    id: 'projects-window',
+    title: 'projetos',
+    icon: 'folder',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 180, y: 60, width: 640, height: 440 },
+    defaultPosition: { x: 180, y: 60, width: 640, height: 440 }
+  },
+  {
+    id: 'browser-window',
+    title: 'Internet Explorer',
+    icon: 'browser',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 90, y: 30, width: 850, height: 580 },
+    defaultPosition: { x: 90, y: 30, width: 850, height: 580 }
   },
   {
     id: 'recycle-bin-window',
@@ -138,6 +163,15 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     );
   };
 
+  const [browserUrl, setBrowserUrl] = useState<string>('https://igcgmusic.com.br');
+
+  const openBrowser = (url?: string) => {
+    if (url) {
+      setBrowserUrl(url);
+    }
+    openWindow('browser-window');
+  };
+
   return (
     <WindowContext.Provider
       value={{
@@ -148,7 +182,10 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         focusWindow,
         minimizeWindow,
         maximizeWindow,
-        updateWindowPosition
+        updateWindowPosition,
+        browserUrl,
+        setBrowserUrl,
+        openBrowser
       }}
     >
       {children}

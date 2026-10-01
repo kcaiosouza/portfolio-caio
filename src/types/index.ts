@@ -22,7 +22,7 @@ export interface WindowItem {
 export interface DesktopIconItem {
   id: string;
   title: string;
-  iconType: 'trash' | 'pdf' | 'notepad' | 'folder';
+  iconType: 'trash' | 'pdf' | 'notepad' | 'folder' | 'browser';
   windowId: string;
 }
 
@@ -33,3 +33,14 @@ export interface HobbyItem {
   content: string;
   description: string;
 }
+
+export interface ProjectItem {
+  id: string;
+  title: string;
+  fileTitle: string;
+  url: string;
+  description: string;
+  tags: string[];
+  featured?: boolean;
+}
+

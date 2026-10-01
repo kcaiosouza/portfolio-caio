@@ -1,4 +1,4 @@
-import { DesktopIconItem, HobbyItem } from '../types';
+import { DesktopIconItem, HobbyItem, ProjectItem } from '../types';
 
 export const PORTFOLIO_DATA = {
   name: 'Dev Caio',
@@ -43,7 +43,20 @@ export const DESKTOP_ICONS: DesktopIconItem[] = [
   { id: 'recycle-bin', title: 'Lixeira', iconType: 'trash', windowId: 'recycle-bin-window' },
   { id: 'cv', title: 'caio-cv.pdf', iconType: 'pdf', windowId: 'cv-window' },
   { id: 'about', title: 'sobre-caio.txt', iconType: 'notepad', windowId: 'about-window' },
+  { id: 'projects', title: 'projetos', iconType: 'folder', windowId: 'projects-window' },
   { id: 'hobbies', title: 'hobbies', iconType: 'folder', windowId: 'hobbies-window' }
+];
+
+export const PROJECTS_DATA: ProjectItem[] = [
+  {
+    id: 'igcgmusic',
+    title: 'IGCG Music',
+    fileTitle: 'IGCG_Music.url',
+    url: 'https://igcgmusic.com.br',
+    description: 'Plataforma completa de música, streaming de web rádio e catálogo de cifras musicais, desenvolvida com React, Node.js e arquitetura moderna.',
+    tags: ['React', 'Node.js', 'Web Radio', 'Cifras', 'Audio Streaming', 'CSS3'],
+    featured: true
+  }
 ];
 
 export const HOBBIES_ITEMS: HobbyItem[] = [
