@@ -13,6 +13,7 @@ import { MobileEmulatorApp } from '../windows/MobileEmulatorApp';
 import { ImageViewerApp } from '../windows/ImageViewerApp';
 import { PuppyAssistant } from '../assistant/PuppyAssistant';
 import { TaskManagerApp } from '../windows/TaskManagerApp';
+import { CmdApp } from '../windows/CmdApp';
 
 export const Desktop: React.FC = () => {
   return (
@@ -56,6 +57,7 @@ export const Desktop: React.FC = () => {
         <InternetExplorerApp />
         <MobileEmulatorApp />
         <TaskManagerApp />
+        <CmdApp />
 
         {/* Instâncias das Janelas dos Arquivos da Pasta Hobbies */}
         {HOBBIES_ITEMS.filter((item) => item.type === 'text').map((hobby) => (
