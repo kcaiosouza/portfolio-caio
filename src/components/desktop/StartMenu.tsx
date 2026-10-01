@@ -143,21 +143,6 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
           <button
             type="button"
             onClick={() => {
-              openWindow('mobile-app-window');
-              onClose();
-            }}
-            className="flex items-center gap-2.5 p-2 rounded hover:bg-[#245EDC] hover:text-white text-gray-800 text-left transition-colors group"
-          >
-            <Smartphone className="w-5 h-5 text-purple-600 group-hover:text-white flex-shrink-0" />
-            <div className="leading-tight">
-              <span className="font-semibold block">Hinario EAV</span>
-              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">App Mobile (Emulador)</span>
-            </div>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
               openWindow('hobbies-window');
               onClose();
             }}
