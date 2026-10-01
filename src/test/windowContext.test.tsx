@@ -40,4 +40,12 @@ describe('WindowContext Management', () => {
     win = result.current.windows.find(w => w.id === 'about-window');
     expect(win?.isMinimized).toBe(true);
   });
+
+  it('contains task-manager-window in default windows with correct metadata', () => {
+    const { result } = renderHook(() => useWindowManager(), { wrapper });
+    const taskmgr = result.current.windows.find(w => w.id === 'task-manager-window');
+    expect(taskmgr).toBeDefined();
+    expect(taskmgr?.title).toBe('Gerenciador de tarefas do Windows');
+    expect(taskmgr?.icon).toBe('taskmgr');
+  });
 });

@@ -160,6 +160,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 260, y: 110, width: 560, height: 400 },
     defaultPosition: { x: 260, y: 110, width: 560, height: 400 }
+  },
+  {
+    id: 'task-manager-window',
+    title: 'Gerenciador de tarefas do Windows',
+    icon: 'taskmgr',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 180, y: 50, width: 480, height: 530 },
+    defaultPosition: { x: 180, y: 50, width: 480, height: 530 }
   }
 ];
 

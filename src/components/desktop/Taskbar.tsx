@@ -26,6 +26,16 @@ export const Taskbar: React.FC = () => {
         return <Smartphone className="w-3.5 h-3.5 text-purple-300 flex-shrink-0" />;
       case 'image':
         return <ImageIcon className="w-3.5 h-3.5 text-emerald-300 flex-shrink-0" />;
+      case 'taskmgr':
+        return (
+          <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="2" width="14" height="10" rx="1" fill="#000000" stroke="#7A96DF" strokeWidth="0.8" />
+            <rect x="2" y="3" width="12" height="8" fill="#001100" />
+            <path d="M2 7H4L5 4L7 9L9 6L11 8H14" stroke="#00FF00" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M6 12H10V14H6V12Z" fill="#7A96DF" />
+            <path d="M4 14H12V15H4V14Z" fill="#5A76BF" />
+          </svg>
+        );
       default:
         return <FileText className="w-3.5 h-3.5 text-white flex-shrink-0" />;
     }
