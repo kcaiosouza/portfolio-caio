@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useWindowManager } from '../../context/WindowContext';
 import { useSystem } from '../../context/SystemContext';
 import { PORTFOLIO_DATA } from '../../utils/data';
-import { Coffee, FileText, Folder, Power, LogOut, Mail, Globe } from 'lucide-react';
+import { Coffee, FileText, Folder, Power, LogOut, Mail, Globe, Smartphone } from 'lucide-react';
 
 interface StartMenuProps {
   isOpen: boolean;
@@ -137,6 +137,21 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
             <div className="leading-tight">
               <span className="font-semibold block">Internet Explorer</span>
               <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Navegador Web Caio</span>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              openWindow('mobile-app-window');
+              onClose();
+            }}
+            className="flex items-center gap-2.5 p-2 rounded hover:bg-[#245EDC] hover:text-white text-gray-800 text-left transition-colors group"
+          >
+            <Smartphone className="w-5 h-5 text-purple-600 group-hover:text-white flex-shrink-0" />
+            <div className="leading-tight">
+              <span className="font-semibold block">Hinario EAV</span>
+              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">App Mobile (Emulador)</span>
             </div>
           </button>
 

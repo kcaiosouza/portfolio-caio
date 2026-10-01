@@ -9,6 +9,7 @@ import { RecycleBinApp } from '../windows/RecycleBinApp';
 import { MinesweeperApp } from '../windows/MinesweeperApp';
 import { ProjectsFolderApp } from '../windows/ProjectsFolderApp';
 import { InternetExplorerApp } from '../windows/InternetExplorerApp';
+import { MobileEmulatorApp } from '../windows/MobileEmulatorApp';
 
 export const Desktop: React.FC = () => {
   return (
@@ -43,6 +44,7 @@ export const Desktop: React.FC = () => {
         <MinesweeperApp />
         <ProjectsFolderApp />
         <InternetExplorerApp />
+        <MobileEmulatorApp />
       </div>
 
       {/* Barra de Tarefas */}

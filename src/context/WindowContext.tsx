@@ -14,6 +14,7 @@ interface WindowContextType {
   browserUrl: string;
   setBrowserUrl: (url: string) => void;
   openBrowser: (url?: string) => void;
+  openMobileApp: (url?: string) => void;
 }
 
 const DEFAULT_WINDOWS: WindowItem[] = [
@@ -71,6 +72,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 90, y: 30, width: 850, height: 580 },
     defaultPosition: { x: 90, y: 30, width: 850, height: 580 }
+  },
+  {
+    id: 'mobile-app-window',
+    title: 'Hinario EAV - Dispositivo Móvel',
+    icon: 'smartphone',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 260, y: 30, width: 395, height: 720 },
+    defaultPosition: { x: 260, y: 30, width: 395, height: 720 }
   },
   {
     id: 'recycle-bin-window',
@@ -172,6 +184,10 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     openWindow('browser-window');
   };
 
+  const openMobileApp = () => {
+    openWindow('mobile-app-window');
+  };
+
   return (
     <WindowContext.Provider
       value={{
@@ -185,7 +201,8 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         updateWindowPosition,
         browserUrl,
         setBrowserUrl,
-        openBrowser
+        openBrowser,
+        openMobileApp
       }}
     >
       {children}

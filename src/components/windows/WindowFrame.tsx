@@ -199,6 +199,14 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({
             <path d="M6 6V11M8 6V11M10 6V11" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
           </svg>
         );
+      case 'smartphone':
+        return (
+          <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none">
+            <rect x="3.5" y="1" width="9" height="14" rx="2" fill="#2E2E38" stroke="#1A1A24" strokeWidth="1" />
+            <rect x="5" y="3" width="6" height="9" rx="0.5" fill="#60A5FA" />
+            <circle cx="8" cy="13.2" r="0.8" fill="#FFFFFF" />
+          </svg>
+        );
       case 'folder':
       default:
         return (

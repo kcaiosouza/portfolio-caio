@@ -22,7 +22,7 @@ export interface WindowItem {
 export interface DesktopIconItem {
   id: string;
   title: string;
-  iconType: 'trash' | 'pdf' | 'notepad' | 'folder' | 'browser';
+  iconType: 'trash' | 'pdf' | 'notepad' | 'folder' | 'browser' | 'smartphone';
   windowId: string;
 }
 
@@ -41,6 +41,7 @@ export interface ProjectItem {
   url: string;
   description: string;
   tags: string[];
+  type?: 'web' | 'mobile';
   featured?: boolean;
 }
 

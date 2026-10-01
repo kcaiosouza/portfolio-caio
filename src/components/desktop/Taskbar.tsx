@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useWindowManager } from '../../context/WindowContext';
 import { StartMenu } from './StartMenu';
 import { SystemTray } from './SystemTray';
-import { FileText, Folder, Trash2, Globe } from 'lucide-react';
+import { FileText, Folder, Trash2, Globe, Smartphone } from 'lucide-react';
 
 export const Taskbar: React.FC = () => {
   const { windows, activeWindowId, focusWindow, minimizeWindow } = useWindowManager();
@@ -22,6 +22,8 @@ export const Taskbar: React.FC = () => {
         return <span className="text-xs">💣</span>;
       case 'browser':
         return <Globe className="w-3.5 h-3.5 text-blue-300 flex-shrink-0" />;
+      case 'smartphone':
+        return <Smartphone className="w-3.5 h-3.5 text-purple-300 flex-shrink-0" />;
       default:
         return <FileText className="w-3.5 h-3.5 text-white flex-shrink-0" />;
     }

@@ -43,11 +43,22 @@ export const DESKTOP_ICONS: DesktopIconItem[] = [
   { id: 'recycle-bin', title: 'Lixeira', iconType: 'trash', windowId: 'recycle-bin-window' },
   { id: 'cv', title: 'caio-cv.pdf', iconType: 'pdf', windowId: 'cv-window' },
   { id: 'about', title: 'sobre-caio.txt', iconType: 'notepad', windowId: 'about-window' },
+  { id: 'hinario-eav', title: 'Hinario EAV', iconType: 'smartphone', windowId: 'mobile-app-window' },
   { id: 'projects', title: 'projetos', iconType: 'folder', windowId: 'projects-window' },
   { id: 'hobbies', title: 'hobbies', iconType: 'folder', windowId: 'hobbies-window' }
 ];
 
 export const PROJECTS_DATA: ProjectItem[] = [
+  {
+    id: 'hinario-eav',
+    title: 'Hinario EAV',
+    fileTitle: 'Hinario_EAV.apk',
+    url: 'https://www.igrejaemcampinagrande.com.br/hinario/',
+    description: 'Aplicativo mobile de hinário com cifras, busca rápida por número/título e partituras, projetado com layout responsivo para smartphones.',
+    tags: ['Mobile App', 'React', 'TypeScript', 'PWA / Web'],
+    type: 'mobile',
+    featured: true
+  },
   {
     id: 'igcgmusic',
     title: 'IGCG Music',
@@ -55,6 +66,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     url: 'https://igcgmusic.com.br',
     description: 'Plataforma completa de música, streaming de web rádio e catálogo de cifras musicais, desenvolvida com React, Node.js e arquitetura moderna.',
     tags: ['React', 'Node.js', 'Web Radio', 'Cifras', 'Audio Streaming', 'CSS3'],
+    type: 'web',
     featured: true
   }
 ];

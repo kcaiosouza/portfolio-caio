@@ -9,6 +9,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Globe,
+  Smartphone,
   ExternalLink,
   Sparkles,
   Info
@@ -23,7 +24,7 @@ export interface ProjectsFolderAppProps {
 }
 
 export const ProjectsFolderContent: React.FC = () => {
-  const { openBrowser } = useWindowManager();
+  const { openBrowser, openMobileApp } = useWindowManager();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(PROJECTS_DATA[0]);
 
   const handleSelect = (project: ProjectItem) => {
@@ -33,7 +34,11 @@ export const ProjectsFolderContent: React.FC = () => {
 
   const handleOpenProject = (project: ProjectItem) => {
     soundEngine.playClick();
-    openBrowser(project.url);
+    if (project.type === 'mobile') {
+      openMobileApp();
+    } else {
+      openBrowser(project.url);
+    }
   };
 
   return (
@@ -97,14 +102,26 @@ export const ProjectsFolderContent: React.FC = () => {
               <span>Tarefas de Projetos</span>
             </div>
             <div className="p-2 flex flex-col gap-1.5 bg-[#F0F4FC] text-xs">
-              <button
-                type="button"
-                onClick={() => selectedProject && handleOpenProject(selectedProject)}
-                className="flex items-center gap-1.5 text-blue-700 hover:text-blue-900 hover:underline text-left"
-              >
-                <Globe className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
-                <span>Navegar no Internet Explorer</span>
-              </button>
+              {selectedProject?.type === 'mobile' ? (
+                <button
+                  type="button"
+                  onClick={() => selectedProject && handleOpenProject(selectedProject)}
+                  className="flex items-center gap-1.5 text-blue-700 hover:text-blue-900 hover:underline text-left font-bold"
+                >
+                  <Smartphone className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                  <span>Abrir no Emulador Móvel</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => selectedProject && handleOpenProject(selectedProject)}
+                  className="flex items-center gap-1.5 text-blue-700 hover:text-blue-900 hover:underline text-left font-bold"
+                >
+                  <Globe className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                  <span>Navegar no Internet Explorer</span>
+                </button>
+              )}
+
               {selectedProject && (
                 <a
                   href={selectedProject.url}
@@ -168,14 +185,18 @@ export const ProjectsFolderContent: React.FC = () => {
                       : 'border-transparent hover:bg-blue-50 hover:border-blue-200'
                   }`}
                 >
-                  {/* Ícone clássico de Atalho Web do Windows XP */}
+                  {/* Ícone clássico de Atalho Web / Mobile do Windows XP */}
                   <div className="relative mb-1">
                     <div className="w-12 h-12 bg-white rounded-md border border-gray-300 shadow-md flex items-center justify-center">
-                      <Globe className="w-8 h-8 text-blue-600" />
+                      {project.type === 'mobile' ? (
+                        <Smartphone className="w-8 h-8 text-purple-600" />
+                      ) : (
+                        <Globe className="w-8 h-8 text-blue-600" />
+                      )}
                     </div>
-                    {/* Seta curvada clássica de atalho */}
+                    {/* Seta curvada ou badge de mobile */}
                     <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-white rounded-full border border-gray-400 flex items-center justify-center text-[10px] text-blue-600 font-bold shadow-xs">
-                      ↗
+                      {project.type === 'mobile' ? '📱' : '↗'}
                     </div>
                   </div>
 
