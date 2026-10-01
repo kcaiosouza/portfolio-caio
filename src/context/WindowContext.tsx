@@ -105,6 +105,50 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 220, y: 70, width: 340, height: 430 },
     defaultPosition: { x: 220, y: 70, width: 340, height: 430 }
+  },
+  {
+    id: 'hobby-cafe-window',
+    title: 'Cafe_Especial.txt - Bloco de notas',
+    icon: 'notepad',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 220, y: 70, width: 560, height: 400 },
+    defaultPosition: { x: 220, y: 70, width: 560, height: 400 }
+  },
+  {
+    id: 'hobby-setup-window',
+    title: 'Setup_Gamer.jpg - Visualizador de imagens do Windows',
+    icon: 'image',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 190, y: 60, width: 640, height: 480 },
+    defaultPosition: { x: 190, y: 60, width: 640, height: 480 }
+  },
+  {
+    id: 'hobby-musica-window',
+    title: 'Musica_e_Lofi.txt - Bloco de notas',
+    icon: 'notepad',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 240, y: 90, width: 560, height: 400 },
+    defaultPosition: { x: 240, y: 90, width: 560, height: 400 }
+  },
+  {
+    id: 'hobby-open-source-window',
+    title: 'Open_Source.txt - Bloco de notas',
+    icon: 'notepad',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 260, y: 110, width: 560, height: 400 },
+    defaultPosition: { x: 260, y: 110, width: 560, height: 400 }
   }
 ];
 

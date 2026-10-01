@@ -181,19 +181,28 @@ describe('Windows XP Portfolio Applications', () => {
       expect(sidebarDetails.textContent).toContain('Estética retrô & PC Gaming');
     });
 
-    it('opens hobby modal on double click and can close it', () => {
-      render(<ExplorerFolderContent />);
+    it('opens hobby item window on double click via WindowManager', () => {
+      const TestComponent = () => {
+        const { windows } = useWindowManager();
+        const musicaWin = windows.find(w => w.id === 'hobby-musica-window');
+        return (
+          <>
+            <ExplorerFolderContent />
+            {musicaWin?.isOpen && <div data-testid="hobby-musica-opened">Musica Aberta</div>}
+          </>
+        );
+      };
+
+      render(
+        <WindowProvider>
+          <TestComponent />
+        </WindowProvider>
+      );
 
       const hobbyItem = screen.getByTestId('hobby-item-musica');
       fireEvent.doubleClick(hobbyItem);
 
-      expect(screen.getByTestId('hobby-detail-modal')).toBeInTheDocument();
-      expect(screen.getByText('Musica_e_Lofi.txt - Detalhes do Hobby')).toBeInTheDocument();
-
-      const closeBtn = screen.getByTestId('btn-close-hobby-modal');
-      fireEvent.click(closeBtn);
-
-      expect(screen.queryByTestId('hobby-detail-modal')).not.toBeInTheDocument();
+      expect(screen.getByTestId('hobby-musica-opened')).toBeInTheDocument();
     });
   });
 

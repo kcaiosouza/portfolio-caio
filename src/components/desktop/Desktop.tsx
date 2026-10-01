@@ -1,5 +1,5 @@
 import React from 'react';
-import { DESKTOP_ICONS } from '../../utils/data';
+import { DESKTOP_ICONS, HOBBIES_ITEMS } from '../../utils/data';
 import { DesktopIcon } from './DesktopIcon';
 import { Taskbar } from './Taskbar';
 import { NotepadApp } from '../windows/NotepadApp';
@@ -10,6 +10,7 @@ import { MinesweeperApp } from '../windows/MinesweeperApp';
 import { ProjectsFolderApp } from '../windows/ProjectsFolderApp';
 import { InternetExplorerApp } from '../windows/InternetExplorerApp';
 import { MobileEmulatorApp } from '../windows/MobileEmulatorApp';
+import { ImageViewerApp } from '../windows/ImageViewerApp';
 
 export const Desktop: React.FC = () => {
   return (
@@ -36,7 +37,7 @@ export const Desktop: React.FC = () => {
           ))}
         </div>
 
-        {/* Instâncias das Janelas */}
+        {/* Instâncias das Janelas Principais */}
         <NotepadApp />
         <PdfViewerApp />
         <ExplorerFolderApp />
@@ -45,6 +46,28 @@ export const Desktop: React.FC = () => {
         <ProjectsFolderApp />
         <InternetExplorerApp />
         <MobileEmulatorApp />
+
+        {/* Instâncias das Janelas dos Arquivos da Pasta Hobbies */}
+        {HOBBIES_ITEMS.filter((item) => item.type === 'text').map((hobby) => (
+          <NotepadApp
+            key={hobby.id}
+            id={`hobby-${hobby.id}-window`}
+            title={`${hobby.title} - Bloco de notas`}
+            fileName={hobby.title}
+            initialContent={hobby.content}
+          />
+        ))}
+
+        {HOBBIES_ITEMS.filter((item) => item.type === 'image').map((hobby) => (
+          <ImageViewerApp
+            key={hobby.id}
+            id={`hobby-${hobby.id}-window`}
+            title={`${hobby.title} - Visualizador de imagens do Windows`}
+            imageSrc={hobby.content}
+            imageTitle={hobby.title}
+            description={hobby.description}
+          />
+        ))}
       </div>
 
       {/* Barra de Tarefas */}

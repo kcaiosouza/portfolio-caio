@@ -2,12 +2,21 @@ import React, { useState } from 'react';
 import WindowFrame from './WindowFrame';
 import { PORTFOLIO_DATA } from '../../utils/data';
 
+export interface NotepadContentProps {
+  initialContent?: string;
+  fileName?: string;
+}
+
 export interface NotepadAppProps {
   id?: string;
+  title?: string;
+  initialContent?: string;
+  fileName?: string;
   withFrame?: boolean;
   isOpen?: boolean;
   onClose?: () => void;
   className?: string;
+  initialPosition?: { x: number; y: number; width: number; height: number };
 }
 
 export const generateNotepadText = () => {
@@ -59,8 +68,13 @@ Arquivo gerado para Windows XP Luna Blue Edition | UTF-8 | CRLF
 ======================================================================`;
 };
 
-export const NotepadContent: React.FC = () => {
-  const [content, setContent] = useState<string>(generateNotepadText);
+export const NotepadContent: React.FC<NotepadContentProps> = ({
+  initialContent,
+  fileName = 'sobre-caio.txt'
+}) => {
+  const [content, setContent] = useState<string>(() =>
+    initialContent !== undefined ? initialContent : generateNotepadText()
+  );
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [cursorPos, setCursorPos] = useState({ line: 1, col: 1 });
   const [wordWrap, setWordWrap] = useState(true);
@@ -263,25 +277,32 @@ export const NotepadContent: React.FC = () => {
 
 export const NotepadApp: React.FC<NotepadAppProps> = ({
   id = 'about-window',
+  title = 'sobre-caio.txt - Bloco de notas',
+  initialContent,
+  fileName,
   withFrame = true,
   isOpen,
   onClose,
-  className = ''
+  className = '',
+  initialPosition
 }) => {
+  const content = <NotepadContent initialContent={initialContent} fileName={fileName} />;
+
   if (!withFrame) {
-    return <NotepadContent />;
+    return content;
   }
 
   return (
     <WindowFrame
       id={id}
-      title="sobre-caio.txt - Bloco de notas"
+      title={title}
       icon="notepad"
       isOpen={isOpen}
       onClose={onClose}
       className={className}
+      initialPosition={initialPosition}
     >
-      <NotepadContent />
+      {content}
     </WindowFrame>
   );
 };

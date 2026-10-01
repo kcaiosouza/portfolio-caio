@@ -3,6 +3,7 @@ import WindowFrame from './WindowFrame';
 import { HOBBIES_ITEMS } from '../../utils/data';
 import { HobbyItem } from '../../types';
 import { soundEngine } from '../../utils/soundEffects';
+import { useWindowManager } from '../../context/WindowContext';
 
 export interface ExplorerFolderAppProps {
   id?: string;
@@ -13,8 +14,14 @@ export interface ExplorerFolderAppProps {
 }
 
 export const ExplorerFolderContent: React.FC = () => {
+  let wm: ReturnType<typeof useWindowManager> | undefined;
+  try {
+    wm = useWindowManager();
+  } catch {
+    wm = undefined;
+  }
+
   const [selectedHobby, setSelectedHobby] = useState<HobbyItem | null>(HOBBIES_ITEMS[0]);
-  const [openedHobby, setOpenedHobby] = useState<HobbyItem | null>(null);
 
   const handleSelectHobby = (hobby: HobbyItem) => {
     soundEngine.playClick();
@@ -23,7 +30,9 @@ export const ExplorerFolderContent: React.FC = () => {
 
   const handleOpenHobby = (hobby: HobbyItem) => {
     soundEngine.playClick();
-    setOpenedHobby(hobby);
+    if (wm) {
+      wm.openWindow(`hobby-${hobby.id}-window`);
+    }
   };
 
   return (
@@ -272,70 +281,6 @@ export const ExplorerFolderContent: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Hobby Detail Dialog / Preview Modal */}
-      {openedHobby && (
-        <div
-          data-testid="hobby-detail-modal"
-          className="absolute inset-0 bg-black/40 z-50 flex items-center justify-center p-4 backdrop-blur-[1px]"
-          onClick={() => setOpenedHobby(null)}
-        >
-          <div
-            className="w-full max-w-lg bg-[#ECE9D8] border-2 border-[#0058EE] rounded-t-[6px] rounded-b-[3px] shadow-2xl overflow-hidden flex flex-col"
-            onClick={e => e.stopPropagation()}
-          >
-            {/* Modal Titlebar */}
-            <div className="h-7 bg-gradient-to-r from-[#0058EE] to-[#0372FD] px-2 flex items-center justify-between text-white font-bold text-xs">
-              <span className="truncate">{openedHobby.title} - Detalhes do Hobby</span>
-              <button
-                type="button"
-                data-testid="btn-close-hobby-modal"
-                onClick={() => setOpenedHobby(null)}
-                className="w-5 h-5 flex items-center justify-center rounded-[2px] bg-[#E76C55] hover:bg-[#E81123] text-white"
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-4 flex flex-col gap-3 bg-white text-gray-900 text-xs">
-              <div className="font-bold text-sm text-[#002D96] border-b border-gray-200 pb-1">
-                {openedHobby.description}
-              </div>
-
-              {openedHobby.type === 'image' ? (
-                <div className="flex flex-col gap-2">
-                  <div className="border border-gray-300 rounded overflow-hidden max-h-64 flex items-center justify-center bg-black">
-                    <img
-                      src={openedHobby.content}
-                      alt={openedHobby.title}
-                      className="max-h-64 w-auto object-contain"
-                    />
-                  </div>
-                  <p className="text-gray-600 italic text-[11px] text-center">
-                    Visualização de Imagem em Alta Resolução
-                  </p>
-                </div>
-              ) : (
-                <div className="bg-[#FAF9F5] border border-gray-300 p-3 rounded font-mono text-xs leading-relaxed text-gray-800">
-                  {openedHobby.content}
-                </div>
-              )}
-            </div>
-
-            {/* Modal Footer */}
-            <div className="bg-[#ECE9D8] border-t border-[#ACA899] px-4 py-2 flex justify-end">
-              <button
-                type="button"
-                onClick={() => setOpenedHobby(null)}
-                className="px-4 py-1 bg-gradient-to-b from-white to-[#E1DECE] border border-[#7F9DB9] rounded-[2px] text-xs font-semibold hover:border-[#0058EE] active:bg-[#C2CEE8]"
-              >
-                Fechar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Explorer Bottom Status Bar */}
       <div
