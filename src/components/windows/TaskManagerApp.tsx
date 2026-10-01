@@ -107,7 +107,10 @@ export const TaskManagerContent: React.FC<{ parentId?: string }> = ({ parentId =
 
   // Real-time animation interval
   useEffect(() => {
-    if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'test') {
+    const isTest =
+      (typeof import.meta !== 'undefined' && Boolean((import.meta as any).env?.MODE === 'test')) ||
+      (typeof globalThis !== 'undefined' && Boolean((globalThis as any).process?.env?.NODE_ENV === 'test'));
+    if (isTest) {
       return;
     }
 

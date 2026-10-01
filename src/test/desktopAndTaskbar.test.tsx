@@ -266,6 +266,20 @@ describe('Desktop and Taskbar Integration Tests', () => {
       fireEvent.keyDown(window, { key: 'Escape' });
       expect(onClose).toHaveBeenCalled();
     });
+
+    it('opens task manager window and calls onClose when clicking "Gerenciador de tarefas"', () => {
+      const onClose = vi.fn();
+      renderWithProviders(
+        <div>
+          <TestDesktopWrapper />
+          <StartMenu isOpen={true} onClose={onClose} />
+        </div>
+      );
+
+      fireEvent.click(screen.getByText('Gerenciador de tarefas'));
+      expect(onClose).toHaveBeenCalled();
+      expect(screen.getByTestId('active-window-val').textContent).toBe('task-manager-window');
+    });
   });
 
   describe('Taskbar Component', () => {
@@ -324,6 +338,23 @@ describe('Desktop and Taskbar Integration Tests', () => {
       // Clicking aboutTab focuses it
       fireEvent.click(aboutTab);
       expect(aboutTab.getAttribute('aria-pressed')).toBe('true');
+    });
+
+    it('opens context menu on right click and clicking "Gerenciador de tarefas" opens Task Manager', () => {
+      renderWithProviders(<TestDesktopWrapper />);
+
+      const taskbarNav = screen.getByRole('navigation', { name: /Barra de tarefas/i });
+      fireEvent.contextMenu(taskbarNav);
+
+      expect(screen.getByText('Bloquear a barra de tarefas')).toBeInTheDocument();
+      expect(screen.getByText('Propriedades')).toBeInTheDocument();
+
+      const taskMgrItem = screen.getByText('Gerenciador de tarefas');
+      expect(taskMgrItem).toBeInTheDocument();
+
+      fireEvent.click(taskMgrItem);
+      expect(screen.getByTestId('active-window-val').textContent).toBe('task-manager-window');
+      expect(screen.getByTestId('open-windows-count').textContent).toBe('1');
     });
   });
 });

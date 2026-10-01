@@ -5,8 +5,18 @@ import { SystemTray } from './SystemTray';
 import { FileText, Folder, Trash2, Globe, Smartphone, Image as ImageIcon } from 'lucide-react';
 
 export const Taskbar: React.FC = () => {
-  const { windows, activeWindowId, focusWindow, minimizeWindow } = useWindowManager();
+  const { windows, activeWindowId, focusWindow, minimizeWindow, openWindow } = useWindowManager();
   const [isStartOpen, setIsStartOpen] = useState(false);
+  const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
+  const [isTaskbarLocked, setIsTaskbarLocked] = useState(true);
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setContextMenu({
+      x: Math.min(e.clientX, window.innerWidth - 180),
+      y: Math.max(10, e.clientY - 120)
+    });
+  };
 
   const getWindowIcon = (icon: string) => {
     switch (icon) {
@@ -62,9 +72,58 @@ export const Taskbar: React.FC = () => {
 
       <StartMenu isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
 
+      {/* Context Menu da Barra de Tarefas */}
+      {contextMenu && (
+        <>
+          <div
+            data-testid="taskbar-context-backdrop"
+            className="fixed inset-0 z-[9995]"
+            onClick={() => setContextMenu(null)}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              setContextMenu(null);
+            }}
+          />
+          <div
+            data-testid="taskbar-context-menu"
+            className="fixed z-[9996] bg-[#ECE9D8] border border-[#716F64] shadow-[2px_2px_4px_rgba(0,0,0,0.4)] p-0.5 rounded-[1px] font-tahoma text-xs text-black min-w-[170px]"
+            style={{ left: contextMenu.x, top: contextMenu.y }}
+          >
+            <div
+              onClick={() => {
+                setIsTaskbarLocked((prev) => !prev);
+                setContextMenu(null);
+              }}
+              className="px-5 py-1 hover:bg-[#316AC5] hover:text-white cursor-default flex items-center justify-between"
+            >
+              <span>Bloquear a barra de tarefas</span>
+              {isTaskbarLocked && <span className="font-bold text-[10px]">✓</span>}
+            </div>
+            <div className="h-[1px] bg-[#ACA899] my-0.5" />
+            <div
+              onClick={() => {
+                openWindow('task-manager-window');
+                setContextMenu(null);
+              }}
+              className="px-5 py-1 hover:bg-[#316AC5] hover:text-white cursor-default font-bold"
+            >
+              Gerenciador de tarefas
+            </div>
+            <div className="h-[1px] bg-[#ACA899] my-0.5" />
+            <div
+              onClick={() => setContextMenu(null)}
+              className="px-5 py-1 hover:bg-[#316AC5] hover:text-white cursor-default"
+            >
+              Propriedades
+            </div>
+          </div>
+        </>
+      )}
+
       <div
         role="navigation"
         aria-label="Barra de tarefas"
+        onContextMenu={handleContextMenu}
         className="h-9 bg-gradient-to-r from-[#245EDC] via-[#0058EE] to-[#245EDC] border-t-2 border-[#002D96] flex items-center justify-between z-[9000] relative select-none shadow-md font-tahoma"
       >
         <div className="flex items-center h-full gap-2 flex-1 overflow-hidden pr-2">

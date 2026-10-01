@@ -194,6 +194,30 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
               <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Jogo clássico XP</span>
             </div>
           </button>
+
+          <button
+            type="button"
+            data-testid="start-menu-taskmgr"
+            onClick={() => {
+              openWindow('task-manager-window');
+              onClose();
+            }}
+            className="flex items-center gap-2.5 p-2 rounded hover:bg-[#245EDC] hover:text-white text-gray-800 text-left transition-colors group"
+          >
+            <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+              <svg className="w-4 h-4 drop-shadow-xs" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="2" width="14" height="10" rx="1" fill="#000000" stroke="#7A96DF" strokeWidth="0.8" />
+                <rect x="2" y="3" width="12" height="8" fill="#001100" />
+                <path d="M2 7H4L5 4L7 9L9 6L11 8H14" stroke="#00FF00" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6 12H10V14H6V12Z" fill="#7A96DF" />
+                <path d="M4 14H12V15H4V14Z" fill="#5A76BF" />
+              </svg>
+            </div>
+            <div className="leading-tight">
+              <span className="font-semibold block">Gerenciador de tarefas</span>
+              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Monitorar e finalizar janelas</span>
+            </div>
+          </button>
         </div>
 
         {/* Coluna direita: links sociais */}
