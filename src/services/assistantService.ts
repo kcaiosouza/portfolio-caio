@@ -92,7 +92,9 @@ export async function sendAssistantMessage(
   userText: string
 ): Promise<{ reply: string; updatedHistory: ChatMessage[] }> {
   // Simulate typing latency in non-test environments
-  const isTest = typeof process !== 'undefined' && process.env?.NODE_ENV === 'test';
+  const isTest =
+    (typeof import.meta !== 'undefined' && Boolean((import.meta as any).env?.MODE === 'test')) ||
+    (typeof globalThis !== 'undefined' && Boolean((globalThis as any).process?.env?.NODE_ENV === 'test'));
   if (!isTest) {
     await new Promise((resolve) => setTimeout(resolve, 350));
   }

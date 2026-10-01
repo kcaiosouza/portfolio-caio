@@ -49,7 +49,7 @@ export const MinesweeperContent: React.FC<{ difficulty: GameDifficulty; setDiffi
   const [timer, setTimer] = useState(0);
   const [flagsCount, setFlagsCount] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Inicializar tabuleiro vazio
   const createEmptyGrid = useCallback((rows: number, cols: number): Cell[][] => {

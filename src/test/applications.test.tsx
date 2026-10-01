@@ -120,8 +120,8 @@ describe('Windows XP Portfolio Applications', () => {
       // Mock createObjectURL & revokeObjectURL
       const mockCreateObjectURL = vi.fn().mockReturnValue('blob:mock-url');
       const mockRevokeObjectURL = vi.fn();
-      global.URL.createObjectURL = mockCreateObjectURL;
-      global.URL.revokeObjectURL = mockRevokeObjectURL;
+      window.URL.createObjectURL = mockCreateObjectURL;
+      window.URL.revokeObjectURL = mockRevokeObjectURL;
 
       render(<PdfViewerContent />);
 
