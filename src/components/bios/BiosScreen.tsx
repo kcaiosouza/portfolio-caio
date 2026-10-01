@@ -15,6 +15,16 @@ export const BiosScreen: React.FC = () => {
     setScreenMode('login');
   }, [setScreenMode]);
 
+  // Pré-carregamento do papel de parede oficial em segundo plano durante a BIOS
+  useEffect(() => {
+    try {
+      const img = new Image();
+      img.src = '/assets/wallpaper-bliss.jpg';
+    } catch {
+      // Fallback seguro caso Image() não esteja disponível
+    }
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
