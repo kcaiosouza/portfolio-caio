@@ -46,6 +46,14 @@ export const Taskbar: React.FC = () => {
             <path d="M4 14H12V15H4V14Z" fill="#5A76BF" />
           </svg>
         );
+      case 'cmd':
+        return (
+          <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="2" width="14" height="11" rx="1" fill="#000000" stroke="#7A96DF" strokeWidth="0.8" />
+            <path d="M3 5.5L5.5 8L3 10.5" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M7 10.5H11" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
+          </svg>
+        );
       default:
         return <FileText className="w-3.5 h-3.5 text-white flex-shrink-0" />;
     }

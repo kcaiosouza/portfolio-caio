@@ -25,6 +25,12 @@ export const DesktopIcon: React.FC<DesktopIconProps> = ({ item }) => {
         return <Globe className="w-9 h-9 text-blue-400 drop-shadow-md" data-testid="icon-browser" />;
       case 'smartphone':
         return <Smartphone className="w-9 h-9 text-purple-400 drop-shadow-md" data-testid="icon-smartphone" />;
+      case 'cmd':
+        return (
+          <div className="w-9 h-9 bg-black border border-[#7A96DF] rounded-[3px] flex items-center justify-center shadow-md p-1" data-testid="icon-cmd">
+            <span className="text-white font-mono text-[11px] font-bold">&gt;_</span>
+          </div>
+        );
       default:
         return <FileText className="w-9 h-9 text-white drop-shadow-md" />;
     }

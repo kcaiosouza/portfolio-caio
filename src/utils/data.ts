@@ -47,6 +47,7 @@ export const DESKTOP_ICONS: DesktopIconItem[] = [
   { id: 'recycle-bin', title: 'Lixeira', iconType: 'trash', windowId: 'recycle-bin-window' },
   { id: 'cv', title: 'caio-cv.pdf', iconType: 'pdf', windowId: 'cv-window' },
   { id: 'about', title: 'sobre-caio.txt', iconType: 'notepad', windowId: 'about-window' },
+  { id: 'cmd', title: 'Prompt de comando', iconType: 'cmd', windowId: 'cmd-window' },
   { id: 'projects', title: 'projetos', iconType: 'folder', windowId: 'projects-window' },
   { id: 'hobbies', title: 'hobbies', iconType: 'folder', windowId: 'hobbies-window' }
 ];

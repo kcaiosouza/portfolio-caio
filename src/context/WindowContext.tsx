@@ -171,6 +171,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 180, y: 50, width: 480, height: 530 },
     defaultPosition: { x: 180, y: 50, width: 480, height: 530 }
+  },
+  {
+    id: 'cmd-window',
+    title: 'Prompt de comando',
+    icon: 'cmd',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 120, y: 70, width: 640, height: 420 },
+    defaultPosition: { x: 120, y: 70, width: 640, height: 420 }
   }
 ];
 

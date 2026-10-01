@@ -218,6 +218,28 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
               <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Monitorar e finalizar janelas</span>
             </div>
           </button>
+
+          <button
+            type="button"
+            data-testid="start-menu-cmd"
+            onClick={() => {
+              openWindow('cmd-window');
+              onClose();
+            }}
+            className="flex items-center gap-2.5 p-2 rounded hover:bg-[#245EDC] hover:text-white text-gray-800 text-left transition-colors group"
+          >
+            <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+              <svg className="w-4 h-4 drop-shadow-xs" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="2" width="14" height="11" rx="1" fill="#000000" stroke="#7A96DF" strokeWidth="0.8" />
+                <path d="M3 5.5L5.5 8L3 10.5" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M7 10.5H11" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
+              </svg>
+            </div>
+            <div className="leading-tight">
+              <span className="font-semibold block">Prompt de comando</span>
+              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Linha de comando do sistema</span>
+            </div>
+          </button>
         </div>
 
         {/* Coluna direita: links sociais */}
