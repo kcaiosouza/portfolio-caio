@@ -163,6 +163,19 @@ export const ProjectsFolderContent: React.FC = () => {
                     ))}
                   </div>
                 </div>
+
+                {selectedProject.playStoreUrl && (
+                  <a
+                    href={selectedProject.playStoreUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-1 flex items-center justify-center gap-1.5 w-full py-1 bg-[#01875F] text-white rounded text-[11px] font-bold hover:bg-[#01704F] shadow-xs text-center"
+                  >
+                    <Smartphone className="w-3.5 h-3.5" />
+                    <span>Baixar na Google Play</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
               </div>
             </div>
           )}

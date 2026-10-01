@@ -102,11 +102,22 @@ export const MobileEmulatorContent: React.FC = () => {
             </button>
 
             <a
+              href="https://play.google.com/store/apps/details?id=br.com.igrejacg.hinarioeav"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] bg-[#01875F] text-white border border-[#016849] hover:bg-[#01704F] font-semibold shadow-xs text-[10px]"
+              title="Abrir na Google Play Store"
+            >
+              <span>Play Store</span>
+              <ExternalLink className="w-2.5 h-2.5" />
+            </a>
+
+            <a
               href="https://www.igrejaemcampinagrande.com.br/hinario/"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] bg-[#245EDC] text-white border border-[#002D96] hover:bg-[#1941A5] font-semibold shadow-xs text-[10px]"
-              title="Abrir em nova aba"
+              title="Abrir versão web em nova aba"
             >
               <ExternalLink className="w-2.5 h-2.5" />
             </a>
@@ -180,17 +191,29 @@ export const MobileEmulatorContent: React.FC = () => {
                   </div>
 
                   <p className="text-[10px] text-gray-600 leading-snug mb-2.5">
-                    Aponte a câmera do seu celular para abrir o app nativamente.
+                    Aponte a câmera do seu celular para abrir o app ou baixe diretamente na loja.
                   </p>
 
-                  <a
-                    href="https://www.igrejaemcampinagrande.com.br/hinario/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-full py-1 bg-[#245EDC] text-white text-xs font-bold rounded hover:bg-[#1941A5] text-center"
-                  >
-                    Abrir Link Direto
-                  </a>
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <a
+                      href="https://play.google.com/store/apps/details?id=br.com.igrejacg.hinarioeav"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full py-1 bg-[#01875F] text-white text-xs font-bold rounded hover:bg-[#01704F] text-center shadow-xs flex items-center justify-center gap-1"
+                    >
+                      <span>Baixar na Google Play</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+
+                    <a
+                      href="https://www.igrejaemcampinagrande.com.br/hinario/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full py-1 bg-gray-100 text-blue-700 text-xs font-semibold rounded border border-gray-300 hover:bg-gray-200 text-center"
+                    >
+                      Abrir Versão Web
+                    </a>
+                  </div>
                 </div>
               </div>
             )}
@@ -203,14 +226,22 @@ export const MobileEmulatorContent: React.FC = () => {
         </div>
 
         {/* Rodapé Informativo das Lojas em Linha Única */}
-        <div className="mt-1 bg-blue-50/90 border border-blue-200 rounded px-2 py-1 flex items-center justify-between text-[10px] text-blue-900 shadow-xs">
+        <div className="mt-1 bg-emerald-50 border border-emerald-300 rounded px-2 py-1 flex items-center justify-between text-[10px] text-emerald-950 shadow-xs">
           <div className="flex items-center gap-1.5 min-w-0 truncate">
-            <CheckCircle2 className="w-3 h-3 text-blue-600 flex-shrink-0" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#01875F] flex-shrink-0" />
             <span className="truncate">
-              Status: <strong>Web Ativa</strong> • Em análise nas lojas
+              Status: <strong>Publicado na Google Play Store</strong> • App Store em análise
             </span>
           </div>
-          <span className="text-[9px] text-gray-500 font-mono ml-1 flex-shrink-0">PWA / React</span>
+          <a
+            href="https://play.google.com/store/apps/details?id=br.com.igrejacg.hinarioeav"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[10px] text-emerald-800 hover:text-emerald-950 hover:underline font-bold ml-1 flex-shrink-0 flex items-center gap-0.5"
+          >
+            <span>Ver na Loja</span>
+            <ExternalLink className="w-2.5 h-2.5" />
+          </a>
         </div>
       </div>
     </div>

@@ -102,8 +102,9 @@ IA:           RAG, embeddings e chat com streaming
   - Busca full-text com paginação virtual para manter a performance
   - Assistente de IA (RAG com embeddings) que recomenda hinos por tema
     ou assunto bíblico, com chat em streaming
-  - Partituras, favoritos, ajuste de fonte e navegação por swipe
-  - Configuração nativa para publicação na App Store e Google Play
+  - Publicado oficialmente na Google Play Store:
+    https://play.google.com/store/apps/details?id=br.com.igrejacg.hinarioeav
+    (App Store em fase final de análise)
 
 > IGCGMUSIC (igcgmusic.com.br)
   Plataforma web de streaming de CDs de música cristã, com player,

@@ -57,8 +57,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
     title: 'Hinario EAV',
     fileTitle: 'Hinario_EAV.apk',
     url: 'https://www.igrejaemcampinagrande.com.br/hinario/',
-    description: 'Aplicativo mobile de hinário com cifras, busca rápida por número/título e partituras, projetado com layout responsivo para smartphones.',
-    tags: ['Mobile App', 'React', 'TypeScript', 'PWA / Web'],
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=br.com.igrejacg.hinarioeav',
+    description: 'Aplicativo mobile de hinário publicado oficialmente na Google Play Store. Conta com cifras, busca rápida por número/título, partituras e assistente de IA, desenvolvido com React Native e Expo.',
+    tags: ['Google Play', 'Mobile App', 'React Native', 'Expo', 'IA / RAG'],
     type: 'mobile',
     featured: true
   },

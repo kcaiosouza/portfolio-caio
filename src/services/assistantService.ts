@@ -31,7 +31,7 @@ function generateMockReply(userText: string): string {
     lower.includes('app') ||
     lower.includes('sistema')
   ) {
-    return 'O Caio desenvolveu projetos como o Hinário EAV (app de louvores com busca inteligente), IGCG Music e IGCG Music Beta (plataforma musical para igrejas), e o WhatWatch (organizador de filmes e séries com IA). Você pode abrir a pasta "Meus Projetos" ou conferir no Menu Iniciar > Projetos!';
+    return 'O Caio desenvolveu projetos incríveis como o Hinário EAV (app oficial já publicado na Google Play Store!), o IGCG Music e IGCG Music Beta (plataforma musical para igrejas), e o WhatWatch. Você pode abrir a pasta "Meus Projetos" para experimentar no emulador ou baixar direto na Play Store!';
   }
 
   if (

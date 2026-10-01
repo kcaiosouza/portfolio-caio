@@ -43,5 +43,7 @@ export interface ProjectItem {
   tags: string[];
   type?: 'web' | 'mobile';
   featured?: boolean;
+  playStoreUrl?: string;
+  appStoreUrl?: string;
 }
 
