@@ -75,6 +75,8 @@ export const Desktop: React.FC = () => {
             imageTitle={hobby.title}
             description={hobby.description}
           />
+        ))}
+
         {/* Cachorrinho Ajudante do Windows XP */}
         <PuppyAssistant />
       </div>
