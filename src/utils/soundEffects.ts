@@ -134,6 +134,59 @@ class SoundEngine {
       // safe fallback
     }
   }
+
+  public playExplosion() {
+    if (this.muted) return;
+    try {
+      this.initCtx();
+      if (!this.audioCtx) return;
+      const bufferSize = this.audioCtx.sampleRate * 0.5;
+      const buffer = this.audioCtx.createBuffer(1, bufferSize, this.audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (this.audioCtx.sampleRate * 0.15));
+      }
+      const noise = this.audioCtx.createBufferSource();
+      noise.buffer = buffer;
+      const gain = this.audioCtx.createGain();
+      gain.gain.setValueAtTime(0.25, this.audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.5);
+      noise.connect(gain);
+      gain.connect(this.audioCtx.destination);
+      noise.start();
+    } catch {
+      // safe fallback
+    }
+  }
+
+  public playWin() {
+    if (this.muted) return;
+    try {
+      this.initCtx();
+      if (!this.audioCtx) return;
+      const notes = [
+        { f: 523.25, time: 0.0, dur: 0.15 }, // C5
+        { f: 659.25, time: 0.15, dur: 0.15 }, // E5
+        { f: 783.99, time: 0.3, dur: 0.15 }, // G5
+        { f: 1046.50, time: 0.45, dur: 0.4 } // C6
+      ];
+      notes.forEach(({ f, time, dur }) => {
+        if (!this.audioCtx) return;
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(f, this.audioCtx.currentTime + time);
+        gain.gain.setValueAtTime(0.15, this.audioCtx.currentTime + time);
+        gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + time + dur);
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
+        osc.start(this.audioCtx.currentTime + time);
+        osc.stop(this.audioCtx.currentTime + time + dur);
+      });
+    } catch {
+      // safe fallback
+    }
+  }
 }
 
 export const soundEngine = new SoundEngine();

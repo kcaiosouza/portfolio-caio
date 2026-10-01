@@ -6,6 +6,7 @@ import { NotepadApp } from '../windows/NotepadApp';
 import { PdfViewerApp } from '../windows/PdfViewerApp';
 import { ExplorerFolderApp } from '../windows/ExplorerFolderApp';
 import { RecycleBinApp } from '../windows/RecycleBinApp';
+import { MinesweeperApp } from '../windows/MinesweeperApp';
 
 export const Desktop: React.FC = () => {
   return (
@@ -37,6 +38,7 @@ export const Desktop: React.FC = () => {
         <PdfViewerApp />
         <ExplorerFolderApp />
         <RecycleBinApp />
+        <MinesweeperApp />
       </div>
 
       {/* Barra de Tarefas */}

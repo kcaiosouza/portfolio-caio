@@ -124,6 +124,24 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
               <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Café, setup e música</span>
             </div>
           </button>
+
+          <button
+            type="button"
+            data-testid="start-menu-minesweeper"
+            onClick={() => {
+              openWindow('minesweeper-window');
+              onClose();
+            }}
+            className="flex items-center gap-2.5 p-2 rounded hover:bg-[#245EDC] hover:text-white text-gray-800 text-left transition-colors group"
+          >
+            <div className="w-5 h-5 flex items-center justify-center text-sm flex-shrink-0">
+              💣
+            </div>
+            <div className="leading-tight">
+              <span className="font-semibold block">Campo Minado</span>
+              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Jogo clássico XP</span>
+            </div>
+          </button>
         </div>
 
         {/* Coluna direita: links sociais */}

@@ -57,6 +57,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 160, y: 70, width: 560, height: 380 },
     defaultPosition: { x: 160, y: 70, width: 560, height: 380 }
+  },
+  {
+    id: 'minesweeper-window',
+    title: 'Campo Minado',
+    icon: 'bomb',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 220, y: 70, width: 340, height: 430 },
+    defaultPosition: { x: 220, y: 70, width: 340, height: 430 }
   }
 ];
 

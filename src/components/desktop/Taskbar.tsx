@@ -18,6 +18,8 @@ export const Taskbar: React.FC = () => {
         return <Folder className="w-3.5 h-3.5 text-yellow-300 flex-shrink-0" />;
       case 'trash':
         return <Trash2 className="w-3.5 h-3.5 text-gray-300 flex-shrink-0" />;
+      case 'bomb':
+        return <span className="text-xs">💣</span>;
       default:
         return <FileText className="w-3.5 h-3.5 text-white flex-shrink-0" />;
     }
