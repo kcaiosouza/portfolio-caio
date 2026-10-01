@@ -67,6 +67,10 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({
   const isDragging = useRef(false);
   const dragStartRef = useRef({ mouseX: 0, mouseY: 0, posX: 0, posY: 0 });
 
+  // Resizing state
+  const isResizing = useRef(false);
+  const resizeStartRef = useRef({ mouseX: 0, mouseY: 0, width: 0, height: 0 });
+
   const handleMouseDown = (e: React.MouseEvent) => {
     // Avoid dragging if clicking buttons or inputs
     if ((e.target as HTMLElement).closest('button') || (e.target as HTMLElement).closest('input')) {
@@ -88,33 +92,60 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({
     e.preventDefault();
   };
 
+  const handleResizeMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleFocus();
+
+    isResizing.current = true;
+    resizeStartRef.current = {
+      mouseX: e.clientX,
+      mouseY: e.clientY,
+      width: position.width,
+      height: position.height
+    };
+  };
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current) return;
+      if (isDragging.current) {
+        const deltaX = e.clientX - dragStartRef.current.mouseX;
+        const deltaY = e.clientY - dragStartRef.current.mouseY;
 
-      const deltaX = e.clientX - dragStartRef.current.mouseX;
-      const deltaY = e.clientY - dragStartRef.current.mouseY;
+        const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
+        const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 768;
 
-      const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
-      const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 768;
+        // Bound containment: keep window within boundaries
+        const minX = 0;
+        const maxX = Math.max(0, viewportWidth - position.width);
+        const minY = 0;
+        const maxY = Math.max(0, viewportHeight - 32);
 
-      // Bound containment: keep window within boundaries
-      const minX = 0;
-      const maxX = Math.max(0, viewportWidth - position.width);
-      const minY = 0;
-      const maxY = Math.max(0, viewportHeight - 32);
+        const calculatedX = Math.max(minX, Math.min(maxX, dragStartRef.current.posX + deltaX));
+        const calculatedY = Math.max(minY, Math.min(maxY, dragStartRef.current.posY + deltaY));
 
-      const calculatedX = Math.max(minX, Math.min(maxX, dragStartRef.current.posX + deltaX));
-      const calculatedY = Math.max(minY, Math.min(maxY, dragStartRef.current.posY + deltaY));
+        const newPos = { x: calculatedX, y: calculatedY };
+        setPosition(prev => ({ ...prev, ...newPos }));
+        wm?.updateWindowPosition(id, newPos);
+      } else if (isResizing.current) {
+        const deltaX = e.clientX - resizeStartRef.current.mouseX;
+        const deltaY = e.clientY - resizeStartRef.current.mouseY;
 
-      const newPos = { x: calculatedX, y: calculatedY };
-      setPosition(prev => ({ ...prev, ...newPos }));
-      wm?.updateWindowPosition(id, newPos);
+        const newWidth = Math.max(260, resizeStartRef.current.width + deltaX);
+        const newHeight = Math.max(200, resizeStartRef.current.height + deltaY);
+
+        const newPos = { width: newWidth, height: newHeight };
+        setPosition(prev => ({ ...prev, ...newPos }));
+        wm?.updateWindowPosition(id, newPos);
+      }
     };
 
     const handleMouseUp = () => {
       if (isDragging.current) {
         isDragging.current = false;
+      }
+      if (isResizing.current) {
+        isResizing.current = false;
       }
     };
 
@@ -125,7 +156,7 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [id, position.width, wm]);
+  }, [id, position.width, position.height, wm]);
 
   const handleFocus = () => {
     if (wm) {
@@ -332,6 +363,24 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({
       <div className="flex-1 flex flex-col min-h-0 bg-[#ECE9D8] overflow-hidden">
         {children}
       </div>
+
+      {/* Grip de Redimensionamento Retrô Windows XP */}
+      {!isMaximized && (
+        <div
+          onMouseDown={handleResizeMouseDown}
+          className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 cursor-se-resize flex items-end justify-end p-0.5 z-30 select-none opacity-60 hover:opacity-100 transition-opacity"
+          title="Redimensionar janela"
+        >
+          <svg className="w-2.5 h-2.5 text-gray-500" viewBox="0 0 10 10" fill="currentColor">
+            <circle cx="8.5" cy="8.5" r="0.9" />
+            <circle cx="5.5" cy="8.5" r="0.9" />
+            <circle cx="8.5" cy="5.5" r="0.9" />
+            <circle cx="2.5" cy="8.5" r="0.9" />
+            <circle cx="5.5" cy="5.5" r="0.9" />
+            <circle cx="8.5" cy="2.5" r="0.9" />
+          </svg>
+        </div>
+      )}
     </div>
   );
 };

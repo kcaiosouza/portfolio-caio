@@ -81,8 +81,8 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     isMinimized: false,
     isMaximized: false,
     zIndex: 10,
-    position: { x: 260, y: 30, width: 395, height: 720 },
-    defaultPosition: { x: 260, y: 30, width: 395, height: 720 }
+    position: { x: 280, y: 15, width: 335, height: 710 },
+    defaultPosition: { x: 280, y: 15, width: 335, height: 710 }
   },
   {
     id: 'recycle-bin-window',
