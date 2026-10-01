@@ -4,6 +4,7 @@ import { WindowProvider } from './context/WindowContext';
 import { BiosScreen } from './components/bios/BiosScreen';
 import { LoginScreen } from './components/login/LoginScreen';
 import { Desktop } from './components/desktop/Desktop';
+import { BsodScreen } from './components/bsod/BsodScreen';
 import { CrtOverlay } from './components/effects/CrtOverlay';
 import { VgaModePrompt } from './components/mobile/VgaModePrompt';
 
@@ -22,6 +23,7 @@ const AppContent: React.FC = () => {
       {screenMode === 'bios' && <BiosScreen />}
       {screenMode === 'login' && <LoginScreen />}
       {screenMode === 'desktop' && <Desktop />}
+      {screenMode === 'bsod' && <BsodScreen />}
     </div>
   );
 };
