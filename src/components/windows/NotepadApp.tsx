@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import WindowFrame from './WindowFrame';
-import { PORTFOLIO_DATA } from '../../utils/data';
 import { useWindowManager } from '../../context/WindowContext';
 
 export interface NotepadContentProps {
@@ -22,51 +21,151 @@ export interface NotepadAppProps {
 }
 
 export const generateNotepadText = () => {
-  const skillsFormatted = PORTFOLIO_DATA.skills.join(', ');
-  const languagesFormatted = PORTFOLIO_DATA.languages
-    .map(l => `  * ${l.lang}: ${l.level}`)
-    .join('\n');
-  const experiencesFormatted = PORTFOLIO_DATA.experience
-    .map(exp => `[${exp.period}] ${exp.role}\n  ${exp.description}`)
-    .join('\n\n');
-
   return `======================================================================
 SOBRE-CAIO.TXT - BLOCO DE NOTAS
 ======================================================================
 
-NOME:         ${PORTFOLIO_DATA.name}
-CARGO:        ${PORTFOLIO_DATA.title}
-EXPERIÊNCIA:  +${PORTFOLIO_DATA.yearsOfExperience} anos de experiência comprovada no mercado de tecnologia
+NOME:         Caio Souza
+CARGO:        Desenvolvedor Full Stack (Pleno III)
+EMPRESA:      Single Software (meio período)
+LOCAL:        Campina Grande, Paraíba - Brasil
+EXPERIÊNCIA:  +6 anos no mercado | programando desde os 12 anos
+FORMAÇÃO:     Bacharelado em Sistemas de Informação (Unifacisa)
+STATUS:       Aberto a propostas de recrutadores (presencial/híbrido)
 
 ----------------------------------------------------------------------
 [1] BIO & RESUMO PROFISSIONAL
 ----------------------------------------------------------------------
-${PORTFOLIO_DATA.summary}
+Desenvolvedor Full Stack que aprende explorando e testando na prática.
+Essa curiosidade me levou à programação ainda na adolescência
+(primeiro código aos 12 anos) e, mais tarde, à graduação em Sistemas
+de Informação.
+
+Hoje concentro meus esforços em evoluir tecnicamente, entender
+sistemas de forma profunda e aplicar esse conhecimento na resolução de
+problemas reais, do front-end ao banco de dados, da web ao mobile.
+
+Valorizo ambientes que incentivam aprendizado contínuo e desafios bem
+definidos.
+
+  > Promovido de Junior a Pleno III em 1 ano e 3 meses na Single
+    Software
+  > Responsável por um app mobile completo, do zero até o preparo para
+    as lojas
+  > Do front à infra: backend, Docker, Traefik e storage S3 próprio
 
 ----------------------------------------------------------------------
-[2] HABILIDADES TÉCNICAS (TECH STACK)
+[2] STACK / TECNOLOGIAS
 ----------------------------------------------------------------------
-${skillsFormatted}
+FRONT-END:    React.js, Next.js, TypeScript, JavaScript, HTML, CSS,
+              Tailwind, Vite, Angular
+MOBILE:       React Native, Expo (Router + EAS), NativeWind,
+              Reanimated
+BACK-END:     Node.js, Socket.IO, GraphQL (já passei por Java/Spring,
+              PHP e Python)
+BANCOS:       SQL, PostgreSQL, MySQL, Prisma, Firebase, Supabase
+INFRA:        Docker, Traefik (proxy reverso), MinIO (S3
+              auto-hospedado)
+PAGAMENTOS:   Stripe, Pagar.me, Mercado Pago
+FERRAMENTAS:  Git/GitHub/GitLab
+IA:           RAG, embeddings e chat com streaming
 
 ----------------------------------------------------------------------
-[3] IDIOMAS
+[3] EXPERIÊNCIA PROFISSIONAL
 ----------------------------------------------------------------------
-${languagesFormatted}
+
+[ 2025-01 > HOJE ]  SINGLE SOFTWARE - Campina Grande, PB
+  Regime: meio período | presencial
+  - 03/2026 - hoje  : Pleno III Software Developer
+  - 01/2025 - 03/2026: Junior Software Developer
+  Tecnologias: Vue, Nuxt, Python e mais
+
+[ 2024-06 > 2025-02 ]  UNIFACISA CENTRO UNIVERSITÁRIO
+  Desenvolvedor de software (estágio) | presencial
+  Tecnologias: AngularJS
+
+[ 2021-11 > 2023-09 ]  REDEPHARMA - Campina Grande, PB
+  Desenvolvedor Full Stack (tempo integral) | presencial
+  Tecnologias: React.js, PHP, Python e mais
+
+[ AUTONOMO ]  MINK
 
 ----------------------------------------------------------------------
-[4] HISTÓRICO PROFISSIONAL
+[4] PROJETOS EM DESTAQUE
 ----------------------------------------------------------------------
-${experiencesFormatted}
+
+> HINÁRIO EAV  (github.com/kcaiosouza/hinarioeav-igcg)
+  App mobile do hinário digital da Igreja em Campina Grande.
+  - Stack: Expo, React Native, TypeScript, NativeWind, Reanimated
+  - Offline-first: catálogo embutido + atualização remota por versão
+    SemVer, download atômico e barra de progresso
+  - Busca full-text com paginação virtual para manter a performance
+  - Assistente de IA (RAG com embeddings) que recomenda hinos por tema
+    ou assunto bíblico, com chat em streaming
+  - Partituras, favoritos, ajuste de fonte e navegação por swipe
+  - Configuração nativa para publicação na App Store e Google Play
+
+> IGCGMUSIC (igcgmusic.com.br)
+  Plataforma web de streaming de CDs de música cristã, com player,
+  playlists e modo aleatório. Feita em Next.js.
+
+> IGCGMUSIC BETA  (beta.igcgmusic.com.br)
+  Nova versão do IGCGMusic, agora com backend próprio e infraestrutura
+  self-hosted, com bem mais funcionalidades que a v1.
+  - Backend containerizado com Docker
+  - Infra com Traefik como proxy reverso
+  - Storage S3 auto-hospedado com MinIO
+  - PostgreSQL como banco de dados
+  - Integração com Stripe
+
+> WHATWATCH  (whatwatch.vercel.app)
+  Site para descobrir o que assistir. HTML, CSS e JavaScript, com
+  sorteio de títulos e compartilhamento de resultados.
+
 
 ----------------------------------------------------------------------
-[5] CONTATOS & CANAIS
+[5] FORMAÇÃO
 ----------------------------------------------------------------------
-  * GitHub:   ${PORTFOLIO_DATA.contacts.github}
-  * LinkedIn: ${PORTFOLIO_DATA.contacts.linkedin}
-  * E-mail:   ${PORTFOLIO_DATA.contacts.email}
+
+  Unifacisa Centro Universitário
+  Bacharelado em Sistemas de Informação
+  ago/2023 - jul/2027 (em andamento)
+
+  Fabrica de Aplicativos
+  Curso Online - Sujeito Programador
+  jan/2021 - jun/2021
+
+----------------------------------------------------------------------
+[6] CURIOSIDADES
+----------------------------------------------------------------------
+
+  * Escrevo código desde os 12 anos
+  * Fora do teclado: jogando, praticando esports e socializando com
+    os amigos
+  * Se tem spec e plano antes do código, provavelmente fui eu, quando
+    se trabalha com IA é necessário para uma acertividade melhor e
+    gastando menos tokens
+
+----------------------------------------------------------------------
+[7] CONTATO
+----------------------------------------------------------------------
+
+  GITHUB:    github.com/kcaiosouza
+  LINKEDIN:  linkedin.com/in/kcaiosouza
+
+----------------------------------------------------------------------
+[8] TODO.TXT
+----------------------------------------------------------------------
+
+  [ ] Concluir a graduação (07/2027)
+  [ ] Evoluir meus códigos
+  [ ] Especialização em IA
+  [ ] Fechar o próximo desafio bem definido
+  [ ] Beber água (sério!)
 
 ======================================================================
-Arquivo gerado para Windows XP Luna Blue Edition | UTF-8 | CRLF
+Última atualização: 10/2026
+Fim do arquivo. Ctrl+S e boa sorte.
 ======================================================================`;
 };
 

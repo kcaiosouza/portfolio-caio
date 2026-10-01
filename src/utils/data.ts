@@ -2,13 +2,14 @@ import { DesktopIconItem, HobbyItem, ProjectItem } from '../types';
 
 export const PORTFOLIO_DATA = {
   name: 'Dev Caio',
-  title: 'Engenheiro de Software Fullstack',
+  title: 'Desenvolvedor Full Stack (Pleno III)',
+  company: 'Single Software',
   yearsOfExperience: 8,
-  summary: 'Desenvolvedor Fullstack com +8 anos de experiência em arquitetura web moderna, aplicações de alto desempenho e interfaces ricas. Especialista no ecossistema JavaScript/TypeScript, construindo soluções escaláveis e intuitivas de ponta a ponta.',
+  summary: 'Desenvolvedor Full Stack que aprende explorando e testando na prática. Promovido de Junior a Pleno III em 1 ano e 3 meses na Single Software. Do front à infra: backend, Docker, Traefik, storage S3 e apps mobile completos.',
   skills: [
     'React', 'Next.js', 'Node.js', 'React Native',
-    'TypeScript', 'JavaScript', 'CSS3 / Tailwind', 'HTML5',
-    'PostgreSQL / MongoDB', 'Git / CI/CD', 'REST / GraphQL'
+    'TypeScript', 'JavaScript', 'Tailwind', 'Docker',
+    'PostgreSQL', 'GraphQL', 'Expo', 'Python', 'Vue / Nuxt'
   ],
   languages: [
     { lang: 'Português', level: 'Nativo' },
@@ -17,24 +18,27 @@ export const PORTFOLIO_DATA = {
   ],
   experience: [
     {
-      period: '2021 - Presente',
-      role: 'Senior Fullstack Engineer',
-      description: 'Liderança técnica no desenvolvimento de aplicações escaláveis em React, Next.js e Node.js. Otimização de performance web e microsserviços.'
+      period: '2025 - Presente',
+      role: 'Desenvolvedor Pleno III',
+      company: 'Single Software',
+      description: 'Promovido de Junior a Pleno III em 1 ano e 3 meses na Single Software. Atuação com Vue, Nuxt, Python e ecossistemas web/mobile.'
     },
     {
-      period: '2018 - 2021',
-      role: 'Fullstack Developer',
-      description: 'Construção de ecossistemas web e mobile com React Native, integrações de APIs REST e arquitetura frontend modular.'
+      period: '2024 - 2025',
+      role: 'Desenvolvedor de Software (Estágio)',
+      company: 'Unifacisa Centro Universitário',
+      description: 'Desenvolvimento de sistemas institucionais utilizando AngularJS.'
     },
     {
-      period: '2016 - 2018',
-      role: 'Frontend Developer',
-      description: 'Desenvolvimento de interfaces SPA dinâmicas, componentização e responsividade focada na experiência do usuário.'
+      period: '2021 - 2023',
+      role: 'Desenvolvedor Full Stack',
+      company: 'Redepharma',
+      description: 'Desenvolvimento Full Stack presencial com React.js, PHP, Python e bancos relacionais.'
     }
   ],
   contacts: {
-    github: 'https://github.com',
-    linkedin: 'https://linkedin.com',
+    github: 'https://github.com/kcaiosouza',
+    linkedin: 'https://linkedin.com/in/kcaiosouza',
     email: 'mailto:caio@exemplo.com'
   }
 };
