@@ -42,6 +42,10 @@ class SoundEngine {
     }
   }
 
+  public playBeep() {
+    this.playBiosBeep();
+  }
+
   public playStartupChime() {
     if (this.muted) return;
     try {

@@ -1,4 +1,4 @@
-export type ScreenMode = 'bios' | 'login' | 'desktop';
+export type ScreenMode = 'bios' | 'login' | 'desktop' | 'bsod';
 
 export interface WindowPosition {
   x: number;
