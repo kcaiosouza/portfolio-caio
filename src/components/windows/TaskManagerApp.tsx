@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import WindowFrame from './WindowFrame';
 import { useWindowManager } from '../../context/WindowContext';
+import { useSystem } from '../../context/SystemContext';
 
 export interface TaskManagerAppProps {
   id?: string;
@@ -88,6 +89,7 @@ const renderTaskIcon = (icon: string) => {
 
 export const TaskManagerContent: React.FC<{ parentId?: string }> = ({ parentId = 'task-manager-window' }) => {
   const { windows, closeWindow, focusWindow, openWindow } = useWindowManager();
+  const { setScreenMode } = useSystem();
   const [activeTab, setActiveTab] = useState<TabType>('applications');
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
   const [selectedProcessPid, setSelectedProcessPid] = useState<number | null>(null);
@@ -263,10 +265,15 @@ export const TaskManagerContent: React.FC<{ parentId?: string }> = ({ parentId =
     const proc = processes.find(p => p.pid === selectedProcessPid);
     if (!proc) return;
 
+    if (proc.name === 'System' || proc.pid === 4) {
+      setScreenMode('bsod');
+      return;
+    }
+
     if (proc.windowId) {
       closeWindow(proc.windowId);
       setSelectedProcessPid(null);
-    } else if (proc.name === 'explorer.exe' || proc.name === 'System' || proc.user === 'SYSTEM') {
+    } else if (proc.name === 'explorer.exe' || proc.user === 'SYSTEM') {
       alert(`O processo "${proc.name}" é um processo crítico do sistema e não pode ser finalizado.`);
     }
   };

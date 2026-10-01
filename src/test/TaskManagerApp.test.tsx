@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { WindowProvider, useWindowManager } from '../context/WindowContext';
+import { SystemProvider, useSystem } from '../context/SystemContext';
 import { TaskManagerApp, TaskManagerContent } from '../components/windows/TaskManagerApp';
 
 describe('TaskManagerApp', () => {
@@ -11,9 +12,11 @@ describe('TaskManagerApp', () => {
 
   it('renders with tabs: Aplicativos, Processos, Desempenho and status bar', () => {
     render(
-      <WindowProvider>
-        <TaskManagerApp isOpen={true} />
-      </WindowProvider>
+      <SystemProvider>
+        <WindowProvider>
+          <TaskManagerApp isOpen={true} />
+        </WindowProvider>
+      </SystemProvider>
     );
 
     expect(screen.getByRole('tab', { name: /Aplicativos/i })).toBeInTheDocument();
@@ -38,9 +41,11 @@ describe('TaskManagerApp', () => {
     };
 
     render(
-      <WindowProvider>
-        <TestComponent />
-      </WindowProvider>
+      <SystemProvider>
+        <WindowProvider>
+          <TestComponent />
+        </WindowProvider>
+      </SystemProvider>
     );
 
     // Should display open about-window
@@ -62,9 +67,11 @@ describe('TaskManagerApp', () => {
     };
 
     render(
-      <WindowProvider>
-        <TestComponent />
-      </WindowProvider>
+      <SystemProvider>
+        <WindowProvider>
+          <TestComponent />
+        </WindowProvider>
+      </SystemProvider>
     );
 
     expect(screen.getByText(/sobre-caio\.txt/i)).toBeInTheDocument();
@@ -101,9 +108,11 @@ describe('TaskManagerApp', () => {
     };
 
     render(
-      <WindowProvider>
-        <ActiveWindowSpy />
-      </WindowProvider>
+      <SystemProvider>
+        <WindowProvider>
+          <ActiveWindowSpy />
+        </WindowProvider>
+      </SystemProvider>
     );
 
     // Initial active window is cv-window (last opened)
@@ -132,9 +141,11 @@ describe('TaskManagerApp', () => {
     };
 
     render(
-      <WindowProvider>
-        <TestComponent />
-      </WindowProvider>
+      <SystemProvider>
+        <WindowProvider>
+          <TestComponent />
+        </WindowProvider>
+      </SystemProvider>
     );
 
     // Switch to Processos tab
@@ -158,9 +169,11 @@ describe('TaskManagerApp', () => {
 
   it('switches to Desempenho tab and displays CPU and Memory performance oscilloscopes', () => {
     render(
-      <WindowProvider>
-        <TaskManagerContent />
-      </WindowProvider>
+      <SystemProvider>
+        <WindowProvider>
+          <TaskManagerContent />
+        </WindowProvider>
+      </SystemProvider>
     );
 
     // Switch to Desempenho tab
@@ -178,5 +191,39 @@ describe('TaskManagerApp', () => {
     // Verify oscilloscope CRT graph elements are rendered
     expect(screen.getByTestId('cpu-oscilloscope')).toBeInTheDocument();
     expect(screen.getByTestId('memory-oscilloscope')).toBeInTheDocument();
+  });
+
+  it('triggers BSOD when terminating the System process in Processos tab', () => {
+    const SystemScreenModeSpy = () => {
+      const { screenMode } = useSystem();
+      return (
+        <div>
+          <span data-testid="screen-mode">{screenMode}</span>
+          <TaskManagerApp isOpen={true} />
+        </div>
+      );
+    };
+
+    render(
+      <SystemProvider>
+        <WindowProvider>
+          <SystemScreenModeSpy />
+        </WindowProvider>
+      </SystemProvider>
+    );
+
+    // Switch to Processos tab
+    fireEvent.click(screen.getByRole('tab', { name: /Processos/i }));
+
+    // Click on the row with System
+    const systemRow = screen.getByText('System');
+    fireEvent.click(systemRow);
+
+    // Click Finalizar processo
+    const endProcessBtn = screen.getByRole('button', { name: /Finalizar processo/i });
+    fireEvent.click(endProcessBtn);
+
+    // Screen mode in context must have transitioned to bsod
+    expect(screen.getByTestId('screen-mode').textContent).toBe('bsod');
   });
 });
