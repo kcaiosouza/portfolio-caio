@@ -39,6 +39,13 @@ export const Desktop: React.FC = () => {
 
         {/* Instâncias das Janelas Principais */}
         <NotepadApp />
+        <NotepadApp
+          id="notepad-blank-window"
+          title="Sem título - Bloco de notas"
+          fileName="Sem título.txt"
+          initialContent=""
+          initialPosition={{ x: 100, y: 60, width: 600, height: 440 }}
+        />
         <PdfViewerApp />
         <ExplorerFolderApp />
         <RecycleBinApp />

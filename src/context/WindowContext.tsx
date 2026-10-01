@@ -30,6 +30,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     defaultPosition: { x: 80, y: 50, width: 620, height: 460 }
   },
   {
+    id: 'notepad-blank-window',
+    title: 'Sem título - Bloco de notas',
+    icon: 'notepad',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 100, y: 60, width: 600, height: 440 },
+    defaultPosition: { x: 100, y: 60, width: 600, height: 440 }
+  },
+  {
     id: 'cv-window',
     title: 'caio-cv.pdf - Visualizador de Documentos',
     icon: 'pdf',

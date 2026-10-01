@@ -91,7 +91,29 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
             <FileText className="w-5 h-5 text-blue-600 group-hover:text-white flex-shrink-0" />
             <div className="leading-tight">
               <span className="font-semibold block">Sobre o Desenvolvedor</span>
-              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Biografia e skills</span>
+              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">sobre-caio.txt</span>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            data-testid="start-menu-notepad"
+            onClick={() => {
+              openWindow('notepad-blank-window');
+              onClose();
+            }}
+            className="flex items-center gap-2.5 p-2 rounded hover:bg-[#245EDC] hover:text-white text-gray-800 text-left transition-colors group"
+          >
+            <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+              <svg className="w-5 h-5 drop-shadow-xs" viewBox="0 0 16 16" fill="none">
+                <rect x="2" y="1" width="12" height="14" rx="1" fill="#FFFFFF" stroke="#003399" strokeWidth="1" />
+                <path d="M4 4H12M4 7H12M4 10H9" stroke="#3366CC" strokeWidth="1" strokeLinecap="round" />
+                <rect x="2" y="1" width="3" height="14" fill="#0058EE" />
+              </svg>
+            </div>
+            <div className="leading-tight">
+              <span className="font-semibold block">Bloco de notas</span>
+              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Anotações em branco</span>
             </div>
           </button>
 

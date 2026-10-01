@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import WindowFrame from './WindowFrame';
 import { PORTFOLIO_DATA } from '../../utils/data';
+import { useWindowManager } from '../../context/WindowContext';
 
 export interface NotepadContentProps {
   initialContent?: string;
   fileName?: string;
+  onClose?: () => void;
 }
 
 export interface NotepadAppProps {
@@ -70,7 +72,8 @@ Arquivo gerado para Windows XP Luna Blue Edition | UTF-8 | CRLF
 
 export const NotepadContent: React.FC<NotepadContentProps> = ({
   initialContent,
-  fileName = 'sobre-caio.txt'
+  fileName = 'sobre-caio.txt',
+  onClose
 }) => {
   const [content, setContent] = useState<string>(() =>
     initialContent !== undefined ? initialContent : generateNotepadText()
@@ -139,7 +142,7 @@ export const NotepadContent: React.FC<NotepadContentProps> = ({
                         const url = URL.createObjectURL(blob);
                         const a = document.createElement('a');
                         a.href = url;
-                        a.download = 'sobre-caio.txt';
+                        a.download = fileName;
                         a.click();
                         setActiveMenu(null);
                       }}
@@ -151,7 +154,10 @@ export const NotepadContent: React.FC<NotepadContentProps> = ({
                     <div className="border-t border-gray-300 my-1" />
                     <button
                       type="button"
-                      onClick={() => setActiveMenu(null)}
+                      onClick={() => {
+                        setActiveMenu(null);
+                        if (onClose) onClose();
+                      }}
                       className="w-full text-left px-3 py-1 hover:bg-[#316AC5] hover:text-white"
                     >
                       Sair
@@ -286,7 +292,28 @@ export const NotepadApp: React.FC<NotepadAppProps> = ({
   className = '',
   initialPosition
 }) => {
-  const content = <NotepadContent initialContent={initialContent} fileName={fileName} />;
+  let wm: ReturnType<typeof useWindowManager> | undefined;
+  try {
+    wm = useWindowManager();
+  } catch {
+    wm = undefined;
+  }
+
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else if (wm) {
+      wm.closeWindow(id);
+    }
+  };
+
+  const content = (
+    <NotepadContent
+      initialContent={initialContent}
+      fileName={fileName}
+      onClose={handleClose}
+    />
+  );
 
   if (!withFrame) {
     return content;
@@ -298,7 +325,7 @@ export const NotepadApp: React.FC<NotepadAppProps> = ({
       title={title}
       icon="notepad"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handleClose}
       className={className}
       initialPosition={initialPosition}
     >
