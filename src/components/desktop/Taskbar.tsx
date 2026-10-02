@@ -61,11 +61,11 @@ export const Taskbar: React.FC = () => {
             <path d="M10 19L8 23H16L14 19H10Z" fill="#1A1A1A" />
           </svg>
         );
-      case 'cs':
+      case 'doom':
         return (
           <img
-            src="/assets/cs16-icon.webp"
-            alt="CS 1.6"
+            src="/assets/doom-icon.webp"
+            alt="DOOM"
             className="w-3.5 h-3.5 object-contain flex-shrink-0"
           />
         );

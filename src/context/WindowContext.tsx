@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import { WindowItem, WindowPosition } from '../types';
 import { soundEngine } from '../utils/soundEffects';
 
@@ -195,9 +195,9 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     defaultPosition: { x: 70, y: 30, width: 840, height: 600 }
   },
   {
-    id: 'cs-window',
-    title: 'Counter-Strike 1.6',
-    icon: 'cs',
+    id: 'doom-window',
+    title: 'DOOM (1993)',
+    icon: 'doom',
     isOpen: false,
     isMinimized: false,
     isMaximized: true,
@@ -266,13 +266,22 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     focusWindow(id);
   };
 
-  const updateWindowPosition = (id: string, pos: Partial<WindowPosition>) => {
+  const updateWindowPosition = useCallback((id: string, pos: Partial<WindowPosition>) => {
     setWindows(prev =>
-      prev.map(w =>
-        w.id === id ? { ...w, position: { ...w.position, ...pos } } : w
-      )
+      prev.map(w => {
+        if (w.id !== id) return w;
+        if (
+          (pos.x === undefined || pos.x === w.position.x) &&
+          (pos.y === undefined || pos.y === w.position.y) &&
+          (pos.width === undefined || pos.width === w.position.width) &&
+          (pos.height === undefined || pos.height === w.position.height)
+        ) {
+          return w;
+        }
+        return { ...w, position: { ...w.position, ...pos } };
+      })
     );
-  };
+  }, []);
 
   const [browserUrl, setBrowserUrl] = useState<string>('https://igcgmusic.com.br');
 

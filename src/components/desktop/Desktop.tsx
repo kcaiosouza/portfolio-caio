@@ -15,7 +15,7 @@ import { PuppyAssistant } from '../assistant/PuppyAssistant';
 import { TaskManagerApp } from '../windows/TaskManagerApp';
 import { CmdApp } from '../windows/CmdApp';
 import { SpiderSolitaireApp } from '../windows/SpiderSolitaireApp';
-import { CsApp } from '../windows/CsApp';
+import { DoomApp } from '../windows/DoomApp';
 
 export const Desktop: React.FC = () => {
   return (
@@ -57,7 +57,7 @@ export const Desktop: React.FC = () => {
         <MobileEmulatorApp />
         <TaskManagerApp />
         <CmdApp />
-        <CsApp />
+        <DoomApp />
 
         {/* Instâncias das Janelas dos Arquivos da Pasta Hobbies */}
         {HOBBIES_ITEMS.filter((item) => item.type === 'text').map((hobby) => (
