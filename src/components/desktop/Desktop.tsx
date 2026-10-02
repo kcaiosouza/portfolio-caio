@@ -14,6 +14,7 @@ import { ImageViewerApp } from '../windows/ImageViewerApp';
 import { PuppyAssistant } from '../assistant/PuppyAssistant';
 import { TaskManagerApp } from '../windows/TaskManagerApp';
 import { CmdApp } from '../windows/CmdApp';
+import { SpiderSolitaireApp } from '../windows/SpiderSolitaireApp';
 
 export const Desktop: React.FC = () => {
   return (
@@ -49,6 +50,7 @@ export const Desktop: React.FC = () => {
         <ExplorerFolderApp />
         <RecycleBinApp />
         <MinesweeperApp />
+        <SpiderSolitaireApp />
         <ProjectsFolderApp />
         <InternetExplorerApp />
         <MobileEmulatorApp />
