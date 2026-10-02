@@ -193,6 +193,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 70, y: 30, width: 840, height: 600 },
     defaultPosition: { x: 70, y: 30, width: 840, height: 600 }
+  },
+  {
+    id: 'cs-window',
+    title: 'Counter-Strike 1.6',
+    icon: 'cs',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: true,
+    zIndex: 10,
+    position: { x: 30, y: 15, width: 1024, height: 680 },
+    defaultPosition: { x: 30, y: 15, width: 1024, height: 680 }
   }
 ];
 
