@@ -105,6 +105,14 @@ export const HOBBIES_ITEMS: HobbyItem[] = [
     type: 'text',
     content: 'Criador e contribuidor de bibliotecas open-source e ferramentas voltadas para a comunidade de desenvolvedores.',
     description: 'Projetos e contribuições'
+  },
+  {
+    id: 'cstrike',
+    title: 'Counter-Strike 1.6.exe',
+    type: 'game',
+    content: 'https://play-cs.com/pt/servers',
+    description: 'FPS tático clássico jogável via navegador',
+    windowId: 'cs-window'
   }
 ];
 

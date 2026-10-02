@@ -31,7 +31,11 @@ export const ExplorerFolderContent: React.FC = () => {
   const handleOpenHobby = (hobby: HobbyItem) => {
     soundEngine.playClick();
     if (wm) {
-      wm.openWindow(`hobby-${hobby.id}-window`);
+      if (hobby.windowId) {
+        wm.openWindow(hobby.windowId);
+      } else {
+        wm.openWindow(`hobby-${hobby.id}-window`);
+      }
     }
   };
 
@@ -192,7 +196,7 @@ export const ExplorerFolderContent: React.FC = () => {
                     {selectedHobby.title}
                   </div>
                   <div className="text-gray-500">
-                    Tipo: {selectedHobby.type === 'image' ? 'Imagem JPEG' : 'Documento de Texto'}
+                    Tipo: {selectedHobby.type === 'game' ? 'Aplicativo' : selectedHobby.type === 'image' ? 'Imagem JPEG' : 'Documento de Texto'}
                   </div>
                   <div className="text-gray-600 text-[11px] leading-tight mt-1 border-t border-gray-200 pt-1">
                     {selectedHobby.description}
@@ -203,6 +207,15 @@ export const ExplorerFolderContent: React.FC = () => {
                         src={selectedHobby.content}
                         alt={selectedHobby.title}
                         className="w-full h-20 object-cover"
+                      />
+                    </div>
+                  )}
+                  {selectedHobby.type === 'game' && (
+                    <div className="mt-2 border border-gray-300 rounded p-2 flex items-center justify-center bg-black/10">
+                      <img
+                        src="/assets/cs16-icon.webp"
+                        alt={selectedHobby.title}
+                        className="w-16 h-16 object-contain drop-shadow"
                       />
                     </div>
                   )}
@@ -251,7 +264,13 @@ export const ExplorerFolderContent: React.FC = () => {
                 >
                   {/* File Icon */}
                   <div className="w-12 h-12 flex items-center justify-center mb-1">
-                    {hobby.type === 'image' ? (
+                    {hobby.type === 'game' ? (
+                      <img
+                        src="/assets/cs16-icon.webp"
+                        alt={hobby.title}
+                        className="w-10 h-10 object-contain drop-shadow-md select-none"
+                      />
+                    ) : hobby.type === 'image' ? (
                       <svg className="w-10 h-10 drop-shadow-md" viewBox="0 0 32 32" fill="none">
                         <rect x="3" y="3" width="26" height="26" rx="2" fill="#FFFFFF" stroke="#808080" strokeWidth="1" />
                         <rect x="5" y="5" width="22" height="22" fill="#3A82F6" />

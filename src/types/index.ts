@@ -29,9 +29,10 @@ export interface DesktopIconItem {
 export interface HobbyItem {
   id: string;
   title: string;
-  type: 'text' | 'image' | 'audio' | 'link';
+  type: 'text' | 'image' | 'audio' | 'link' | 'game';
   content: string;
   description: string;
+  windowId?: string;
 }
 
 export interface ProjectItem {
