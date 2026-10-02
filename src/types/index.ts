@@ -22,7 +22,7 @@ export interface WindowItem {
 export interface DesktopIconItem {
   id: string;
   title: string;
-  iconType: 'trash' | 'pdf' | 'notepad' | 'folder' | 'browser' | 'smartphone' | 'cmd' | 'taskmgr';
+  iconType: 'trash' | 'pdf' | 'notepad' | 'folder' | 'browser' | 'smartphone' | 'cmd' | 'taskmgr' | 'spider';
   windowId: string;
 }
 

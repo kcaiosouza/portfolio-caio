@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DesktopIconItem } from '../../types';
 import { useWindowManager } from '../../context/WindowContext';
-import { Trash2, FileText, Folder, Globe, Smartphone, SquareTerminal } from 'lucide-react';
+import { Trash2, FileText, Folder, Globe, Smartphone, SquareTerminal, Spade } from 'lucide-react';
 
 interface DesktopIconProps {
   item: DesktopIconItem;
@@ -27,6 +27,8 @@ export const DesktopIcon: React.FC<DesktopIconProps> = ({ item }) => {
         return <Smartphone className="w-9 h-9 text-purple-400 drop-shadow-md" data-testid="icon-smartphone" />;
       case 'cmd':
         return <SquareTerminal className="w-9 h-9 text-emerald-400 drop-shadow-md" data-testid="icon-cmd" />;
+      case 'spider':
+        return <Spade className="w-9 h-9 text-emerald-300 drop-shadow-md" data-testid="icon-spider" />;
       default:
         return <FileText className="w-9 h-9 text-white drop-shadow-md" />;
     }

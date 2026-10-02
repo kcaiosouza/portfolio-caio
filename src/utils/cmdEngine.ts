@@ -44,6 +44,7 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
           '  NOTEPAD [arquivo]     Abre o Bloco de Notas (ex: notepad sobre-caio.txt).',
           '  TASKMGR               Abre o Gerenciador de Tarefas do Windows.',
           '  WINMINE / MINESWEEPER Abre o jogo Campo Minado.',
+          '  SPIDER / SOLITAIRE    Abre o jogo Paciência Spider.',
           '  EXPLORER [pasta]      Abre o Windows Explorer (projetos ou hobbies).',
           '  IEXPLORE [url]        Abre o navegador Internet Explorer.',
           '  HINARIO               Abre o emulador móvel do aplicativo Hinário EAV.',
@@ -122,6 +123,12 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
     case 'minado':
       ctx.openWindow('minesweeper-window');
       return { output: ['Iniciando Campo Minado...'] };
+
+    case 'spider':
+    case 'paciencia':
+    case 'solitaire':
+      ctx.openWindow('spider-solitaire-window');
+      return { output: ['Iniciando Paciência Spider...'] };
 
     case 'explorer':
       if (args.toLowerCase().includes('hobb')) {

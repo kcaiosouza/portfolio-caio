@@ -54,6 +54,13 @@ export const Taskbar: React.FC = () => {
             <path d="M7 10.5H11" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
           </svg>
         );
+      case 'spider':
+        return (
+          <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C9.5 7 4 11 4 15.5C4 18.5 6.5 21 9.5 21C10.7 21 11.5 20.2 12 19.5C12.5 20.2 13.3 21 14.5 21C17.5 21 20 18.5 20 15.5C20 11 14.5 7 12 2Z" fill="#1A1A1A" />
+            <path d="M10 19L8 23H16L14 19H10Z" fill="#1A1A1A" />
+          </svg>
+        );
       default:
         return <FileText className="w-3.5 h-3.5 text-white flex-shrink-0" />;
     }

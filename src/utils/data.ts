@@ -49,7 +49,8 @@ export const DESKTOP_ICONS: DesktopIconItem[] = [
   { id: 'about', title: 'sobre-caio.txt', iconType: 'notepad', windowId: 'about-window' },
   { id: 'cmd', title: 'Prompt de comando', iconType: 'cmd', windowId: 'cmd-window' },
   { id: 'projects', title: 'projetos', iconType: 'folder', windowId: 'projects-window' },
-  { id: 'hobbies', title: 'hobbies', iconType: 'folder', windowId: 'hobbies-window' }
+  { id: 'hobbies', title: 'hobbies', iconType: 'folder', windowId: 'hobbies-window' },
+  { id: 'spider', title: 'Paciência Spider', iconType: 'spider', windowId: 'spider-solitaire-window' }
 ];
 
 export const PROJECTS_DATA: ProjectItem[] = [

@@ -182,6 +182,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 120, y: 70, width: 640, height: 420 },
     defaultPosition: { x: 120, y: 70, width: 640, height: 420 }
+  },
+  {
+    id: 'spider-solitaire-window',
+    title: 'Paciência Spider',
+    icon: 'spider',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 70, y: 30, width: 840, height: 600 },
+    defaultPosition: { x: 70, y: 30, width: 840, height: 600 }
   }
 ];
 
