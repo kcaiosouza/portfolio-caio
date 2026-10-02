@@ -107,12 +107,12 @@ export const HOBBIES_ITEMS: HobbyItem[] = [
     description: 'Projetos e contribuições'
   },
   {
-    id: 'cstrike',
-    title: 'Counter-Strike 1.6.exe',
+    id: 'doom',
+    title: 'Doom.exe',
     type: 'game',
-    content: 'https://play-cs.com/pt/servers',
-    description: 'FPS tático clássico jogável via navegador',
-    windowId: 'cs-window'
+    content: 'Classic DOOM (1993) via DOSBox WASM',
+    description: 'Clássico jogo de tiro em primeira pessoa de 1993 rodando via DOSBox WebAssembly.',
+    windowId: 'doom-window'
   }
 ];
 

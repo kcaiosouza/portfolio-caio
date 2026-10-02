@@ -45,7 +45,7 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
           '  TASKMGR               Abre o Gerenciador de Tarefas do Windows.',
           '  WINMINE / MINESWEEPER Abre o jogo Campo Minado.',
           '  SPIDER / SOLITAIRE    Abre o jogo Paciência Spider.',
-          '  CSTRIKE / CS          Abre o jogo Counter-Strike 1.6.',
+          '  DOOM                  Abre o jogo DOOM (1993).',
           '  EXPLORER [pasta]      Abre o Windows Explorer (projetos ou hobbies).',
           '  IEXPLORE [url]        Abre o navegador Internet Explorer.',
           '  HINARIO               Abre o emulador móvel do aplicativo Hinário EAV.',
@@ -131,11 +131,14 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
       ctx.openWindow('spider-solitaire-window');
       return { output: ['Iniciando Paciência Spider...'] };
 
-    case 'cstrike':
-    case 'cs':
-    case 'cs16':
-      ctx.openWindow('cs-window');
-      return { output: ['Iniciando Counter-Strike 1.6...'] };
+    case 'doom':
+      ctx.openWindow('doom-window');
+      return {
+        output: [
+          'Iniciando DOOM (1993)...',
+          'Controles: Setas para mover, Ctrl para atirar, Espaço para abrir portas, 1-7 armas.'
+        ]
+      };
 
     case 'explorer':
       if (args.toLowerCase().includes('hobb')) {

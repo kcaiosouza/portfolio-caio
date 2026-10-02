@@ -81,17 +81,17 @@ describe('cmdEngine', () => {
     expect(ctx.openWindow).toHaveBeenCalledWith('cv-window');
   });
 
-  it('handles cstrike command to open cs-window', () => {
+  it('executa comando doom abrindo doom-window', () => {
+    const ctx = createMockContext();
+    const result = executeCommand('doom', ctx);
+    expect(ctx.openWindow).toHaveBeenCalledWith('doom-window');
+    expect(result.output[0]).toContain('DOOM');
+  });
+
+  it('não reconhece mais cstrike', () => {
     const ctx = createMockContext();
     const result = executeCommand('cstrike', ctx);
-    expect(ctx.openWindow).toHaveBeenCalledWith('cs-window');
-    expect(result.output[0]).toContain('Counter-Strike 1.6');
-
-    executeCommand('cs', ctx);
-    expect(ctx.openWindow).toHaveBeenCalledWith('cs-window');
-
-    executeCommand('cs16', ctx);
-    expect(ctx.openWindow).toHaveBeenCalledWith('cs-window');
+    expect(result.output[0]).toContain('não é reconhecido');
   });
 
   it('handles exit command', () => {
