@@ -1,35 +1,84 @@
 import React, { useState, useRef, useEffect } from 'react';
 import WindowFrame from '../WindowFrame';
+import { useWindowManager } from '../../../context/WindowContext';
 import { soundEngine } from '../../../utils/soundEffects';
 import { MsnMessage } from '../../../types/msn';
-import { generateMsnReply, parseEmoticonText } from '../../../utils/msnEngine';
+import { generateMsnReply, parseEmoticonText, DEFAULT_MSN_CONTACTS } from '../../../utils/msnEngine';
 import { MsnDirectMessageModal } from './MsnDirectMessageModal';
 import { MsnEmoticonPicker } from './MsnEmoticonPicker';
-import { Bell, Smile, Mail, Coffee } from 'lucide-react';
+import { Bell, Smile, Mail, Coffee, Briefcase, User } from 'lucide-react';
 
 export interface MsnChatAppProps {
   id?: string;
   isOpen?: boolean;
   onClose?: () => void;
   className?: string;
+  contactId?: string;
 }
 
-export const MsnChatApp: React.FC<MsnChatAppProps> = ({
-  id = 'msn-chat-window',
-  isOpen,
-  onClose,
-  className = '',
-}) => {
-  const [messages, setMessages] = useState<MsnMessage[]>([
+const INITIAL_CONVERSATIONS: Record<string, MsnMessage[]> = {
+  caio: [
     {
-      id: 'init-1',
+      id: 'init-caio',
       sender: 'caio',
       senderName: 'Caio Souza',
       text: 'E aí! Beleza? Bem-vindo ao meu MSN Messenger! Pode me perguntar sobre meus projetos, carreira ou stack técnica! :)',
       timestamp: Date.now(),
       type: 'chat',
     },
-  ]);
+  ],
+  rover: [
+    {
+      id: 'init-rover',
+      sender: 'rover',
+      senderName: 'Rover Assistente',
+      text: 'Au au! 🐶 Olá! Eu sou o Rover, o assistente do Caio no Windows XP! Como posso te ajudar a explorar o portfólio hoje? :D',
+      timestamp: Date.now(),
+      type: 'chat',
+    },
+  ],
+  recruiter: [
+    {
+      id: 'init-recruiter',
+      sender: 'recruiter',
+      senderName: 'Recrutador Tech',
+      text: 'Olá! No momento estou offline avaliando perfis no LinkedIn. Pode deixar sua mensagem ou falar com o Caio pelo e-mail! :)',
+      timestamp: Date.now(),
+      type: 'chat',
+    },
+  ],
+  steve: [
+    {
+      id: 'init-steve',
+      sender: 'steve',
+      senderName: 'Steve Ballmer',
+      text: 'Developers, developers, developers! 💻 (Steve está offline no momento)',
+      timestamp: Date.now(),
+      type: 'chat',
+    },
+  ],
+};
+
+export const MsnChatApp: React.FC<MsnChatAppProps> = ({
+  id = 'msn-chat-window',
+  isOpen,
+  onClose,
+  className = '',
+  contactId: propContactId,
+}) => {
+  let wm: ReturnType<typeof useWindowManager> | undefined;
+  try {
+    wm = useWindowManager();
+  } catch {
+    wm = undefined;
+  }
+
+  const activeContactId = propContactId || wm?.activeMsnContactId || 'caio';
+  const activeContact =
+    DEFAULT_MSN_CONTACTS.find(c => c.id === activeContactId) || DEFAULT_MSN_CONTACTS[0];
+
+  const [conversations, setConversations] =
+    useState<Record<string, MsnMessage[]>>(INITIAL_CONVERSATIONS);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
@@ -37,12 +86,13 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
   const [isDirectModalOpen, setIsDirectModalOpen] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const currentMessages = conversations[activeContactId] || [];
 
   useEffect(() => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
     }
-  }, [messages, isTyping]);
+  }, [currentMessages, isTyping, activeContactId]);
 
   const handleSendMessage = async () => {
     const trimmed = inputText.trim();
@@ -58,7 +108,10 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
       type: 'chat',
     };
 
-    setMessages(prev => [...prev, userMsg]);
+    setConversations(prev => ({
+      ...prev,
+      [activeContactId]: [...(prev[activeContactId] || []), userMsg],
+    }));
     setInputText('');
     setIsTyping(true);
 
@@ -70,19 +123,22 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
       await new Promise(resolve => setTimeout(resolve, 600));
     }
 
-    const replyText = generateMsnReply(trimmed);
+    const replyText = generateMsnReply(trimmed, activeContactId);
     soundEngine.playMsnMessage();
 
     const botMsg: MsnMessage = {
       id: String(Date.now() + 1),
-      sender: 'caio',
-      senderName: 'Caio Souza',
+      sender: activeContactId,
+      senderName: activeContact.name,
       text: replyText,
       timestamp: Date.now(),
       type: 'chat',
     };
 
-    setMessages(prev => [...prev, botMsg]);
+    setConversations(prev => ({
+      ...prev,
+      [activeContactId]: [...(prev[activeContactId] || []), botMsg],
+    }));
     setIsTyping(false);
   };
 
@@ -99,19 +155,26 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
       timestamp: Date.now(),
       type: 'nudge',
     };
-    setMessages(prev => [...prev, nudgeMsg]);
+
+    setConversations(prev => ({
+      ...prev,
+      [activeContactId]: [...(prev[activeContactId] || []), nudgeMsg],
+    }));
 
     setTimeout(() => {
       soundEngine.playMsnMessage();
       const replyMsg: MsnMessage = {
         id: String(Date.now() + 1),
-        sender: 'caio',
-        senderName: 'Caio Souza',
-        text: generateMsnReply('[nudge]'),
+        sender: activeContactId,
+        senderName: activeContact.name,
+        text: generateMsnReply('[nudge]', activeContactId),
         timestamp: Date.now(),
         type: 'chat',
       };
-      setMessages(prev => [...prev, replyMsg]);
+      setConversations(prev => ({
+        ...prev,
+        [activeContactId]: [...(prev[activeContactId] || []), replyMsg],
+      }));
     }, 800);
   };
 
@@ -139,10 +202,29 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
     });
   };
 
+  const renderAvatar = () => {
+    if (activeContact.id === 'rover') {
+      return (
+        <img
+          src="/assets/beagle-puppy.png"
+          alt="Rover Assistente"
+          className="w-7 h-7 object-contain"
+        />
+      );
+    }
+    if (activeContact.id === 'caio') {
+      return <Coffee className="w-5 h-5 text-[#6F4E37]" />;
+    }
+    if (activeContact.id === 'recruiter') {
+      return <Briefcase className="w-5 h-5 text-purple-700" />;
+    }
+    return <User className="w-5 h-5 text-gray-600" />;
+  };
+
   return (
     <WindowFrame
       id={id}
-      title="Caio Souza - Conversa"
+      title={`${activeContact.name} - Conversa`}
       icon="msn"
       isOpen={isOpen}
       onClose={onClose}
@@ -153,16 +235,18 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
         {/* Contact Header Bar */}
         <div className="p-2 bg-gradient-to-r from-[#CADAF3] via-[#E4EDFA] to-[#CADAF3] border-b border-[#A0B8E0] flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
-            <div className="w-8 h-8 rounded bg-[#ECE9D8] border border-blue-400 flex items-center justify-center flex-shrink-0 shadow-xs">
-              <Coffee className="w-5 h-5 text-[#6F4E37]" />
+            <div className="w-8 h-8 rounded bg-[#ECE9D8] border border-blue-400 flex items-center justify-center flex-shrink-0 shadow-xs overflow-hidden">
+              {renderAvatar()}
             </div>
             <div className="min-w-0">
               <div className="font-bold text-xs text-[#002D96] flex items-center gap-1">
-                <span>Caio Souza</span>
-                <span className="text-[10px] text-green-700 font-normal">&lt;Disponível&gt;</span>
+                <span>{activeContact.name}</span>
+                <span className={`text-[10px] font-normal ${activeContact.status === 'online' ? 'text-green-700' : 'text-gray-500'}`}>
+                  &lt;{activeContact.status === 'online' ? 'Disponível' : 'Offline'}&gt;
+                </span>
               </div>
               <div className="text-[10px] text-gray-600 truncate">
-                Full Stack Dev | Single Software (Pleno III) 🚀
+                {activeContact.personalMessage}
               </div>
             </div>
           </div>
@@ -183,7 +267,7 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
           ref={scrollContainerRef}
           className="flex-1 p-3 overflow-y-auto bg-white border-b border-[#A0B8E0] space-y-2 select-text"
         >
-          {messages.map(m => {
+          {currentMessages.map(m => {
             if (m.type === 'nudge') {
               return (
                 <div key={m.id} className="text-center my-1 text-gray-500 font-bold italic text-[11px] bg-yellow-50 py-0.5 rounded border border-yellow-200">
@@ -210,7 +294,7 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce" />
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce [animation-delay:0.15s]" />
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce [animation-delay:0.3s]" />
-              <span className="ml-1">Caio Souza está digitando uma mensagem...</span>
+              <span className="ml-1">{activeContact.name} está digitando uma mensagem...</span>
             </div>
           )}
         </div>

@@ -81,7 +81,7 @@ function generateMockReply(userText: string): string {
     lower.includes('linkedin') ||
     lower.includes('falar')
   ) {
-    return 'Você pode entrar em contato com o Caio pelo e-mail kcaiosouza@gmail.com, ou abrir o aplicativo "Contato" na Área de Trabalho para acessar seus perfis no GitHub e LinkedIn!';
+    return 'Você pode entrar em contato com o Caio pelo e-mail caio@exemplo.com, ou abrir o aplicativo "Contato" na Área de Trabalho para acessar seus perfis no GitHub e LinkedIn!';
   }
 
   return 'Au au! 🐶 Sou o assistente do portfólio do Caio! No momento estou operando no modo offline com respostas rápidas, mas em breve o Caio vai me conectar ao backend de IA dele! Pergunte-me sobre os projetos, a stack, quem é o Caio ou como navegar pelo sistema!';

@@ -21,9 +21,11 @@ export const MsnContactListApp: React.FC<MsnContactListAppProps> = ({
   className = '',
 }) => {
   let openWindow: (winId: string) => void = () => {};
+  let openMsnChat: ((contactId?: string) => void) | undefined;
   try {
     const wm = useWindowManager();
     openWindow = wm.openWindow;
+    openMsnChat = wm.openMsnChat;
   } catch {
     // safe fallback if outside WindowProvider
   }
@@ -47,7 +49,11 @@ export const MsnContactListApp: React.FC<MsnContactListAppProps> = ({
       return;
     }
     soundEngine.playMsnOnline();
-    openWindow('msn-chat-window');
+    if (openMsnChat) {
+      openMsnChat(contact.id);
+    } else {
+      openWindow('msn-chat-window');
+    }
   };
 
   const getStatusColor = (st: MsnStatus) => {
@@ -235,7 +241,8 @@ export const MsnContactListApp: React.FC<MsnContactListAppProps> = ({
                 {offlineContacts.map(c => (
                   <div
                     key={c.id}
-                    className="flex items-start gap-1.5 p-1 rounded hover:bg-gray-100 cursor-default"
+                    onDoubleClick={() => handleContactClick(c)}
+                    className="flex items-start gap-1.5 p-1 rounded hover:bg-gray-100 cursor-pointer"
                   >
                     <span className="w-2.5 h-2.5 rounded-full mt-1 flex-shrink-0 bg-gray-400" />
                     <div className="min-w-0">

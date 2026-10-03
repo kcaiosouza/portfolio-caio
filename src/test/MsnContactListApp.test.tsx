@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { MsnContactListApp } from '../components/windows/msn/MsnContactListApp';
+import { MsnChatApp } from '../components/windows/msn/MsnChatApp';
 import { WindowProvider } from '../context/WindowContext';
 
 describe('MsnContactListApp', () => {
@@ -64,6 +65,21 @@ describe('MsnContactListApp', () => {
     fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
 
     expect(screen.getByText(/Codando o portfolio XP/i)).toBeInTheDocument();
+  });
+
+  it('opens conversation for Rover Assistente when double-clicking Rover', () => {
+    render(
+      <WindowProvider>
+        <MsnContactListApp isOpen={true} />
+        <MsnChatApp isOpen={true} />
+      </WindowProvider>
+    );
+
+    const roverContact = screen.getByText('Rover Assistente');
+    fireEvent.doubleClick(roverContact);
+
+    expect(screen.getByText('Rover Assistente - Conversa')).toBeInTheDocument();
+    expect(screen.getByText(/Eu sou o Rover/i)).toBeInTheDocument();
   });
 });
 

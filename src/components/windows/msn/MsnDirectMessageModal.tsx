@@ -9,7 +9,7 @@ export interface MsnDirectMessageModalProps {
 
 export const MsnDirectMessageModal: React.FC<MsnDirectMessageModalProps> = ({ isOpen, onClose }) => {
   const [copied, setCopied] = useState(false);
-  const email = 'kcaiosouza@gmail.com';
+  const email = 'caio@exemplo.com';
 
   if (!isOpen) return null;
 

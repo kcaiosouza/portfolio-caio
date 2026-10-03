@@ -15,6 +15,9 @@ interface WindowContextType {
   setBrowserUrl: (url: string) => void;
   openBrowser: (url?: string) => void;
   openMobileApp: (url?: string) => void;
+  activeMsnContactId: string;
+  setActiveMsnContactId: (id: string) => void;
+  openMsnChat: (contactId?: string) => void;
 }
 
 const DEFAULT_WINDOWS: WindowItem[] = [
@@ -318,6 +321,40 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     openWindow('mobile-app-window');
   };
 
+  const [activeMsnContactId, setActiveMsnContactId] = useState<string>('caio');
+
+  const openMsnChat = (contactId?: string) => {
+    const targetId = contactId || 'caio';
+    setActiveMsnContactId(targetId);
+
+    const contactName =
+      targetId === 'rover'
+        ? 'Rover Assistente'
+        : targetId === 'recruiter'
+        ? 'Recrutador Tech'
+        : targetId === 'steve'
+        ? 'Steve Ballmer'
+        : 'Caio Souza';
+
+    soundEngine.playClick();
+    const nextZ = topZIndex + 1;
+    setTopZIndex(nextZ);
+    setActiveWindowId('msn-chat-window');
+    setWindows(prev =>
+      prev.map(w =>
+        w.id === 'msn-chat-window'
+          ? {
+              ...w,
+              title: `${contactName} - Conversa`,
+              isOpen: true,
+              isMinimized: false,
+              zIndex: nextZ,
+            }
+          : w
+      )
+    );
+  };
+
   return (
     <WindowContext.Provider
       value={{
@@ -332,7 +369,10 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         browserUrl,
         setBrowserUrl,
         openBrowser,
-        openMobileApp
+        openMobileApp,
+        activeMsnContactId,
+        setActiveMsnContactId,
+        openMsnChat
       }}
     >
       {children}

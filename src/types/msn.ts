@@ -12,7 +12,7 @@ export interface MsnContact {
 
 export interface MsnMessage {
   id: string;
-  sender: 'user' | 'caio' | 'system';
+  sender: 'user' | 'system' | string;
   senderName: string;
   text: string;
   timestamp: number;
