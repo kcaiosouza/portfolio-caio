@@ -195,9 +195,9 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     defaultPosition: { x: 70, y: 30, width: 840, height: 600 }
   },
   {
-    id: 'doom-window',
-    title: 'DOOM (1993)',
-    icon: 'doom',
+    id: 'minecraft-window',
+    title: 'Minecraft Classic',
+    icon: 'minecraft',
     isOpen: false,
     isMinimized: false,
     isMaximized: true,
