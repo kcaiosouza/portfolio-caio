@@ -107,12 +107,12 @@ export const HOBBIES_ITEMS: HobbyItem[] = [
     description: 'Projetos e contribuições'
   },
   {
-    id: 'doom',
-    title: 'Doom.exe',
+    id: 'minecraft',
+    title: 'Minecraft.exe',
     type: 'game',
-    content: 'Classic DOOM (1993) via DOSBox WASM',
-    description: 'Clássico jogo de tiro em primeira pessoa de 1993 rodando via DOSBox WebAssembly.',
-    windowId: 'doom-window'
+    content: 'https://classic.minecraft.net/',
+    description: 'Versão clássica original de Minecraft (0.0.23a_01) jogável diretamente no navegador.',
+    windowId: 'minecraft-window'
   }
 ];
 

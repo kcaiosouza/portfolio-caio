@@ -81,16 +81,24 @@ describe('cmdEngine', () => {
     expect(ctx.openWindow).toHaveBeenCalledWith('cv-window');
   });
 
-  it('executa comando doom abrindo doom-window', () => {
+  it('executa comando minecraft abrindo minecraft-window', () => {
     const ctx = createMockContext();
-    const result = executeCommand('doom', ctx);
-    expect(ctx.openWindow).toHaveBeenCalledWith('doom-window');
-    expect(result.output[0]).toContain('DOOM');
+    const result = executeCommand('minecraft', ctx);
+    expect(ctx.openWindow).toHaveBeenCalledWith('minecraft-window');
+    expect(result.output[0]).toContain('Minecraft');
   });
 
-  it('não reconhece mais cstrike', () => {
+  it('executa aliases mc e craft', () => {
     const ctx = createMockContext();
-    const result = executeCommand('cstrike', ctx);
+    executeCommand('mc', ctx);
+    expect(ctx.openWindow).toHaveBeenCalledWith('minecraft-window');
+    executeCommand('craft', ctx);
+    expect(ctx.openWindow).toHaveBeenCalledWith('minecraft-window');
+  });
+
+  it('não reconhece mais doom', () => {
+    const ctx = createMockContext();
+    const result = executeCommand('doom', ctx);
     expect(result.output[0]).toContain('não é reconhecido');
   });
 

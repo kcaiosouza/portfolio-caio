@@ -45,7 +45,7 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
           '  TASKMGR               Abre o Gerenciador de Tarefas do Windows.',
           '  WINMINE / MINESWEEPER Abre o jogo Campo Minado.',
           '  SPIDER / SOLITAIRE    Abre o jogo Paciência Spider.',
-          '  DOOM                  Abre o jogo DOOM (1993).',
+          '  MINECRAFT             Abre o jogo Minecraft Classic.',
           '  EXPLORER [pasta]      Abre o Windows Explorer (projetos ou hobbies).',
           '  IEXPLORE [url]        Abre o navegador Internet Explorer.',
           '  HINARIO               Abre o emulador móvel do aplicativo Hinário EAV.',
@@ -131,12 +131,14 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
       ctx.openWindow('spider-solitaire-window');
       return { output: ['Iniciando Paciência Spider...'] };
 
-    case 'doom':
-      ctx.openWindow('doom-window');
+    case 'minecraft':
+    case 'mc':
+    case 'craft':
+      ctx.openWindow('minecraft-window');
       return {
         output: [
-          'Iniciando DOOM (1993)...',
-          'Controles: Setas para mover, Ctrl para atirar, Espaço para abrir portas, 1-7 armas.'
+          'Iniciando Minecraft Classic...',
+          'Dica: Clique na tela para capturar o mouse. Pressione Esc para liberar.'
         ]
       };
 

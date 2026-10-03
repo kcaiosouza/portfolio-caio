@@ -213,7 +213,7 @@ export const ExplorerFolderContent: React.FC = () => {
                   {selectedHobby.type === 'game' && (
                     <div className="mt-2 border border-gray-300 rounded p-2 flex items-center justify-center bg-black/10">
                       <img
-                        src="/assets/doom-icon.webp"
+                        src="/assets/minecraft-icon.webp"
                         alt={selectedHobby.title}
                         className="w-16 h-16 object-contain drop-shadow"
                       />
@@ -266,7 +266,7 @@ export const ExplorerFolderContent: React.FC = () => {
                   <div className="w-12 h-12 flex items-center justify-center mb-1">
                     {hobby.type === 'game' ? (
                       <img
-                        src="/assets/doom-icon.webp"
+                        src="/assets/minecraft-icon.webp"
                         alt={hobby.title}
                         className="w-10 h-10 object-contain drop-shadow-md select-none"
                       />
