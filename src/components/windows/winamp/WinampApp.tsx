@@ -28,7 +28,18 @@ export const WinampApp: React.FC<WinampAppProps> = ({
 
   const win = wm?.windows.find(w => w.id === id);
   const isOpen = propIsOpen !== undefined ? propIsOpen : (win ? win.isOpen : true);
+  const isMinimized = win ? win.isMinimized : false;
   const onClose = propOnClose || (() => wm?.closeWindow(id));
+  const zIndex = win ? win.zIndex : 30;
+
+  // Track active sub-window for internal layering
+  const [activeSubWindow, setActiveSubWindow] = useState<'main' | 'eq' | 'pl'>('main');
+
+  const handleFocus = () => {
+    if (wm) {
+      wm.focusWindow(id);
+    }
+  };
 
   // Audio Playback State
   const [tracks, setTracks] = useState<WinampTrack[]>(WINAMP_DEFAULT_TRACKS);
@@ -121,6 +132,7 @@ export const WinampApp: React.FC<WinampAppProps> = ({
   const startDrag = (target: 'main' | 'eq' | 'pl', e: React.MouseEvent) => {
     e.preventDefault();
     if (wm) wm.focusWindow(id);
+    setActiveSubWindow(target);
 
     const initialPos =
       target === 'main'
@@ -317,14 +329,25 @@ export const WinampApp: React.FC<WinampAppProps> = ({
     setCurrentTrackIndex(-1);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || isMinimized) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-30">
+    <div
+      className="fixed inset-0 pointer-events-none"
+      style={{ zIndex }}
+      onMouseDown={handleFocus}
+    >
       {/* Main Window */}
       <div
-        style={{ transform: `translate(${mainPos.x}px, ${mainPos.y}px)` }}
+        style={{
+          transform: `translate(${mainPos.x}px, ${mainPos.y}px)`,
+          zIndex: activeSubWindow === 'main' ? 3 : 1,
+        }}
         className="absolute top-0 left-0 pointer-events-auto"
+        onMouseDown={() => {
+          handleFocus();
+          setActiveSubWindow('main');
+        }}
       >
         <WinampMainWindow
           currentTrack={currentTrack}
@@ -361,8 +384,15 @@ export const WinampApp: React.FC<WinampAppProps> = ({
       {/* Equalizer Window */}
       {isEqOpen && (
         <div
-          style={{ transform: `translate(${eqPos.x}px, ${eqPos.y}px)` }}
+          style={{
+            transform: `translate(${eqPos.x}px, ${eqPos.y}px)`,
+            zIndex: activeSubWindow === 'eq' ? 3 : 2,
+          }}
           className="absolute top-0 left-0 pointer-events-auto"
+          onMouseDown={() => {
+            handleFocus();
+            setActiveSubWindow('eq');
+          }}
         >
           <WinampEqualizerWindow
             isOpen={isEqOpen}
@@ -384,8 +414,15 @@ export const WinampApp: React.FC<WinampAppProps> = ({
       {/* Playlist Window */}
       {isPlOpen && (
         <div
-          style={{ transform: `translate(${plPos.x}px, ${plPos.y}px)` }}
+          style={{
+            transform: `translate(${plPos.x}px, ${plPos.y}px)`,
+            zIndex: activeSubWindow === 'pl' ? 3 : 1,
+          }}
           className="absolute top-0 left-0 pointer-events-auto"
+          onMouseDown={() => {
+            handleFocus();
+            setActiveSubWindow('pl');
+          }}
         >
           <WinampPlaylistWindow
             isOpen={isPlOpen}
