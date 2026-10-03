@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { WindowFrame } from './WindowFrame';
+import { useWindowManager } from '../../context/WindowContext';
 
 export interface DoomAppProps {
   id?: string;
@@ -15,6 +16,13 @@ export const DoomApp: React.FC<DoomAppProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const dosInstanceRef = useRef<any>(null);
 
+  let wm: ReturnType<typeof useWindowManager> | undefined;
+  try {
+    wm = useWindowManager();
+  } catch {
+    wm = undefined;
+  }
+
   useEffect(() => {
     if (!isOpen || !containerRef.current) return;
 
@@ -22,25 +30,23 @@ export const DoomApp: React.FC<DoomAppProps> = ({
 
     const startDoom = async () => {
       try {
-        // Ensure CSS is present
-        if (!document.getElementById('js-dos-css')) {
-          const link = document.createElement('link');
-          link.id = 'js-dos-css';
-          link.rel = 'stylesheet';
-          link.href = '/js-dos/js-dos.css';
-          document.head.appendChild(link);
+        // Wait for window.Dos if script is still loading
+        let retries = 0;
+        while (!(window as any).Dos && retries < 20) {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          retries++;
         }
 
-        // Ensure JS is loaded
-        let DosFn = (window as any).Dos;
-        if (!DosFn) {
-          await import('js-dos');
-          DosFn = (window as any).Dos;
+        const DosFn = (window as any).Dos;
+        if (!isMounted || !containerRef.current || !DosFn) {
+          if (!DosFn) console.error('window.Dos not found');
+          return;
         }
 
-        if (!isMounted || !containerRef.current || !DosFn) return;
+        // Clean container before mounting
+        containerRef.current.innerHTML = '';
 
-        // Initialize js-dos v8 with url and pathPrefix
+        // Initialize js-dos player
         const dosInstance = DosFn(containerRef.current, {
           url: '/assets/doom.jsdos',
           pathPrefix: '/js-dos/emulators/',
@@ -49,7 +55,7 @@ export const DoomApp: React.FC<DoomAppProps> = ({
         });
         dosInstanceRef.current = dosInstance;
       } catch (err) {
-        console.error('Failed to load js-dos:', err);
+        console.error('Failed to initialize DOOM via js-dos:', err);
       }
     };
 
@@ -80,7 +86,12 @@ export const DoomApp: React.FC<DoomAppProps> = ({
       }
       dosInstanceRef.current = null;
     }
-    if (onClose) onClose();
+
+    if (onClose) {
+      onClose();
+    } else if (wm) {
+      wm.closeWindow(id);
+    }
   };
 
   return (
