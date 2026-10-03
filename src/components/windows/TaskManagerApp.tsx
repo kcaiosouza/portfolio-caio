@@ -238,6 +238,19 @@ export const TaskManagerContent: React.FC<{ parentId?: string }> = ({ parentId =
           user: 'Caio Souza',
           windowId: w.id
         });
+      } else if (w.id === 'msn-window' || w.id === 'msn-chat-window') {
+        if (!base.some(p => p.name === 'msnmsgr.exe')) {
+          base.push({
+            id: `proc-${w.id}`,
+            name: 'msnmsgr.exe',
+            pid: 3280,
+            cpu: 1,
+            memory: '11.840 K',
+            memoryKb: 11840,
+            user: 'Caio Souza',
+            windowId: w.id
+          });
+        }
       }
     });
 

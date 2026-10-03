@@ -50,7 +50,8 @@ export const DESKTOP_ICONS: DesktopIconItem[] = [
   { id: 'cmd', title: 'Prompt de comando', iconType: 'cmd', windowId: 'cmd-window' },
   { id: 'projects', title: 'projetos', iconType: 'folder', windowId: 'projects-window' },
   { id: 'hobbies', title: 'hobbies', iconType: 'folder', windowId: 'hobbies-window' },
-  { id: 'spider', title: 'Paciência Spider', iconType: 'spider', windowId: 'spider-solitaire-window' }
+  { id: 'spider', title: 'Paciência Spider', iconType: 'spider', windowId: 'spider-solitaire-window' },
+  { id: 'msn', title: 'MSN Messenger', iconType: 'msn', windowId: 'msn-window' }
 ];
 
 export const PROJECTS_DATA: ProjectItem[] = [

@@ -204,6 +204,28 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 30, y: 15, width: 1024, height: 680 },
     defaultPosition: { x: 30, y: 15, width: 1024, height: 680 }
+  },
+  {
+    id: 'msn-window',
+    title: 'MSN Messenger',
+    icon: 'msn',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 80, y: 40, width: 300, height: 530 },
+    defaultPosition: { x: 80, y: 40, width: 300, height: 530 }
+  },
+  {
+    id: 'msn-chat-window',
+    title: 'Caio Souza - Conversa',
+    icon: 'msn',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 260, y: 70, width: 490, height: 470 },
+    defaultPosition: { x: 260, y: 70, width: 490, height: 470 }
   }
 ];
 

@@ -279,6 +279,15 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({
             className="w-3.5 h-3.5 object-contain flex-shrink-0"
           />
         );
+      case 'msn':
+        return (
+          <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+            <circle cx="8" cy="7" r="4" fill="#00AA00" />
+            <path d="M2 19C2 15 5 13 8 13C11 13 14 15 14 19" fill="#00AA00" />
+            <circle cx="16" cy="9" r="3.5" fill="#0078D7" />
+            <path d="M11 20C11 16.5 13.5 15 16 15C18.5 15 21 16.5 21 20" fill="#0078D7" />
+          </svg>
+        );
       case 'folder':
       default:
         return (

@@ -258,6 +258,29 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
               <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Linha de comando do sistema</span>
             </div>
           </button>
+
+          <button
+            type="button"
+            data-testid="start-menu-msn"
+            onClick={() => {
+              openWindow('msn-window');
+              onClose();
+            }}
+            className="flex items-center gap-2.5 p-2 rounded hover:bg-[#245EDC] hover:text-white text-gray-800 text-left transition-colors group"
+          >
+            <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+              <svg className="w-5 h-5 drop-shadow-xs" viewBox="0 0 24 24" fill="none">
+                <circle cx="8" cy="7" r="4" fill="#00AA00" />
+                <path d="M2 19C2 15 5 13 8 13C11 13 14 15 14 19" fill="#00AA00" />
+                <circle cx="16" cy="9" r="3.5" fill="#0078D7" />
+                <path d="M11 20C11 16.5 13.5 15 16 15C18.5 15 21 16.5 21 20" fill="#0078D7" />
+              </svg>
+            </div>
+            <div className="leading-tight">
+              <span className="font-semibold block">MSN Messenger</span>
+              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Mensagens instantâneas</span>
+            </div>
+          </button>
         </div>
 
         {/* Coluna direita: links sociais */}

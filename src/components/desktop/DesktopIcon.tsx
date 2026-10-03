@@ -29,6 +29,15 @@ export const DesktopIcon: React.FC<DesktopIconProps> = ({ item }) => {
         return <SquareTerminal className="w-9 h-9 text-emerald-400 drop-shadow-md" data-testid="icon-cmd" />;
       case 'spider':
         return <Spade className="w-9 h-9 text-emerald-300 drop-shadow-md" data-testid="icon-spider" />;
+      case 'msn':
+        return (
+          <svg className="w-9 h-9 drop-shadow-md" viewBox="0 0 24 24" fill="none" data-testid="icon-msn">
+            <circle cx="8" cy="7" r="4" fill="#00C853" />
+            <path d="M2 19C2 14.5 5 12.5 8 12.5C11 12.5 14 14.5 14 19" fill="#00C853" />
+            <circle cx="16" cy="9" r="3.5" fill="#0091EA" />
+            <path d="M11 20C11 16 13.5 14.5 16 14.5C21 16 21 20 21 20" fill="#0091EA" />
+          </svg>
+        );
       default:
         return <FileText className="w-9 h-9 text-white drop-shadow-md" />;
     }

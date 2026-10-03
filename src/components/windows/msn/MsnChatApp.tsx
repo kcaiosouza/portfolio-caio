@@ -132,7 +132,7 @@ export const MsnChatApp: React.FC<MsnChatAppProps> = ({
     return tokens.map((token, idx) => {
       if (typeof token === 'string') return <span key={idx}>{token}</span>;
       return (
-        <span key={idx} title={`${token.label} (${token.code})`} className="inline-block text-sm mx-0.5 align-middle select-none">
+        <span key={idx} title={`${token.label} (${token.code})`} className="inline-block text-base mx-1 align-middle select-none">
           {token.icon}
         </span>
       );
