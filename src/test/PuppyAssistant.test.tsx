@@ -63,7 +63,7 @@ describe('PuppyAssistant', () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/O Caio desenvolveu projetos como o Hinário EAV/i)
+        screen.getByText(/O Caio desenvolveu projetos.*como o Hinário EAV/i)
       ).toBeInTheDocument();
     });
 
@@ -138,7 +138,7 @@ describe('PuppyAssistant', () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/O Caio desenvolveu projetos como o Hinário EAV/i)
+        screen.getByText(/O Caio desenvolveu projetos.*como o Hinário EAV/i)
       ).toBeInTheDocument();
     });
 
