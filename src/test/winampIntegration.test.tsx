@@ -25,11 +25,11 @@ describe('Winamp & Eclectic Music Notepad Integration', () => {
   it('includes user provided tracks in DEFAULT_WINAMP_TRACKS', () => {
     const myPrayer = DEFAULT_WINAMP_TRACKS.find(t => t.title.includes('My Prayer'));
     expect(myPrayer).toBeDefined();
-    expect(myPrayer?.url).toContain('48a3201c-314c-49b8-ae24-4462b832cef2.mp3');
+    expect(myPrayer?.url).toContain('384d1368-913a-43b6-bd16-7a9dd2da0fd3.mp3');
 
     const anelo = DEFAULT_WINAMP_TRACKS.find(t => t.title.includes('Anelo por Tua Presença'));
     expect(anelo).toBeDefined();
-    expect(anelo?.url).toContain('3ccbd100-ee53-4884-a701-288271f8beb0.mp3');
+    expect(anelo?.url).toContain('e98167f0-98ce-4e2e-9d0f-eb99694ca9b0.mp3');
   });
 
   it('handles winamp, music, and player commands in cmdEngine', () => {

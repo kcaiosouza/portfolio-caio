@@ -15,7 +15,7 @@ export const WINAMP_DEFAULT_TRACKS: WinampTrack[] = [
     artist: 'Editora Árvore da Vida',
     duration: 225,
     durationFormatted: '3:45',
-    url: 'https://storage.minklab.cloud/podcrer-media/audio/48a3201c-314c-49b8-ae24-4462b832cef2.mp3',
+    url: 'https://storage.minklab.cloud/podcrer-media/audio/384d1368-913a-43b6-bd16-7a9dd2da0fd3.mp3',
   },
   {
     id: 'track-2',
@@ -23,7 +23,7 @@ export const WINAMP_DEFAULT_TRACKS: WinampTrack[] = [
     artist: 'Editora Árvore da Vida',
     duration: 240,
     durationFormatted: '4:00',
-    url: 'https://storage.minklab.cloud/podcrer-media/audio/3ccbd100-ee53-4884-a701-288271f8beb0.mp3',
+    url: 'https://storage.minklab.cloud/podcrer-media/audio/e98167f0-98ce-4e2e-9d0f-eb99694ca9b0.mp3',
   },
   {
     id: 'track-3',

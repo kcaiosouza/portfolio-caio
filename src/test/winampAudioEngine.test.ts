@@ -26,7 +26,7 @@ describe('Winamp Tracks & EQ Presets', () => {
     expect(track1.duration).toBe(225);
     expect(track1.durationFormatted).toBe('3:45');
     expect(track1.url).toBe(
-      'https://storage.minklab.cloud/podcrer-media/audio/48a3201c-314c-49b8-ae24-4462b832cef2.mp3'
+      'https://storage.minklab.cloud/podcrer-media/audio/384d1368-913a-43b6-bd16-7a9dd2da0fd3.mp3'
     );
 
     // Track 2: Anelo por Tua Presença - Editora Árvore da Vida
@@ -36,7 +36,7 @@ describe('Winamp Tracks & EQ Presets', () => {
     expect(track2.duration).toBe(240);
     expect(track2.durationFormatted).toBe('4:00');
     expect(track2.url).toBe(
-      'https://storage.minklab.cloud/podcrer-media/audio/3ccbd100-ee53-4884-a701-288271f8beb0.mp3'
+      'https://storage.minklab.cloud/podcrer-media/audio/e98167f0-98ce-4e2e-9d0f-eb99694ca9b0.mp3'
     );
 
     // Track 3: Echo - Crusher-P
