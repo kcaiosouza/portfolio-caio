@@ -65,3 +65,22 @@
 .msn-shaking {
   animation: msn-shake 0.55s ease-in-out;
 }
+
+/* Winamp Marquee Scrolling */
+@keyframes winamp-marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.winamp-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: winamp-marquee 12s linear infinite;
+}
+.winamp-marquee:hover {
+  animation-play-state: paused;
+}

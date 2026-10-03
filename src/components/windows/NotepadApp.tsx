@@ -151,8 +151,8 @@ IA:           RAG, embeddings e chat com streaming
 [7] CONTATO
 ----------------------------------------------------------------------
 
-  GITHUB:    github.com/kcaiosouza
-  LINKEDIN:  linkedin.com/in/kcaiosouza
+  GITHUB:    https://github.com/kcaiosouza
+  LINKEDIN:  https://linkedin.com/in/kcaiosouza
 
 ----------------------------------------------------------------------
 [8] TODO.TXT

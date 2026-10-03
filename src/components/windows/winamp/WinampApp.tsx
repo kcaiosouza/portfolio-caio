@@ -291,6 +291,19 @@ export const WinampApp: React.FC<WinampAppProps> = ({
     setTracks(prev => [...prev, ...newTracks]);
   };
 
+  const handleAddFiles = (files: File[]) => {
+    const newTracks: WinampTrack[] = files.map((file, i) => ({
+      id: `local-${Date.now()}-${i}`,
+      title: file.name.replace(/\.[^/.]+$/, ''),
+      artist: 'Arquivo Local',
+      duration: 180,
+      durationFormatted: '3:00',
+      url: URL.createObjectURL(file),
+    }));
+    handleAddTracks(newTracks);
+    playTrackAtIndex(tracks.length);
+  };
+
   const handleRemoveTrack = (index: number) => {
     setTracks(prev => prev.filter((_, i) => i !== index));
     if (currentTrackIndex >= index && currentTrackIndex > 0) {
@@ -315,6 +328,7 @@ export const WinampApp: React.FC<WinampAppProps> = ({
       >
         <WinampMainWindow
           currentTrack={currentTrack}
+          currentTrackIndex={currentTrackIndex}
           isPlaying={isPlaying}
           currentTime={currentTime}
           duration={duration}
@@ -337,6 +351,7 @@ export const WinampApp: React.FC<WinampAppProps> = ({
           onToggleShade={() => setIsMainShade(prev => !prev)}
           onToggleShuffle={() => setIsShuffle(prev => !prev)}
           onToggleRepeat={() => setIsRepeat(prev => !prev)}
+          onAddFiles={handleAddFiles}
           onMinimize={() => wm?.minimizeWindow(id)}
           onClose={onClose}
           onStartDrag={e => startDrag('main', e)}
