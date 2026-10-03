@@ -18,6 +18,7 @@ import { SpiderSolitaireApp } from '../windows/SpiderSolitaireApp';
 import { MinecraftApp } from '../windows/MinecraftApp';
 import { MsnContactListApp } from '../windows/msn/MsnContactListApp';
 import { MsnChatApp } from '../windows/msn/MsnChatApp';
+import { WinampApp } from '../windows/winamp/WinampApp';
 
 export const Desktop: React.FC = () => {
   return (
@@ -62,6 +63,7 @@ export const Desktop: React.FC = () => {
         <MinecraftApp />
         <MsnContactListApp />
         <MsnChatApp />
+        <WinampApp />
 
         {/* Instâncias das Janelas dos Arquivos da Pasta Hobbies */}
         {HOBBIES_ITEMS.filter((item) => item.type === 'text').map((hobby) => (

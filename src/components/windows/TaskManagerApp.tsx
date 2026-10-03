@@ -251,6 +251,19 @@ export const TaskManagerContent: React.FC<{ parentId?: string }> = ({ parentId =
             windowId: w.id
           });
         }
+      } else if (w.id === 'winamp-window') {
+        if (!base.some(p => p.name === 'winamp.exe')) {
+          base.push({
+            id: `proc-${w.id}`,
+            name: 'winamp.exe',
+            pid: 4120,
+            cpu: 2,
+            memory: '14.220 K',
+            memoryKb: 14220,
+            user: 'Caio Souza',
+            windowId: w.id
+          });
+        }
       }
     });
 

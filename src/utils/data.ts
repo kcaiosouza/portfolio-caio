@@ -51,7 +51,8 @@ export const DESKTOP_ICONS: DesktopIconItem[] = [
   { id: 'projects', title: 'projetos', iconType: 'folder', windowId: 'projects-window' },
   { id: 'hobbies', title: 'hobbies', iconType: 'folder', windowId: 'hobbies-window' },
   { id: 'spider', title: 'Paciência Spider', iconType: 'spider', windowId: 'spider-solitaire-window' },
-  { id: 'msn', title: 'MSN Messenger', iconType: 'msn', windowId: 'msn-window' }
+  { id: 'msn', title: 'MSN Messenger', iconType: 'msn', windowId: 'msn-window' },
+  { id: 'winamp', title: 'Winamp', iconType: 'winamp', windowId: 'winamp-window' }
 ];
 
 export const PROJECTS_DATA: ProjectItem[] = [
@@ -95,10 +96,67 @@ export const HOBBIES_ITEMS: HobbyItem[] = [
   },
   {
     id: 'musica',
-    title: 'Musica_e_Lofi.txt',
+    title: 'Minhas_Musicas.txt',
     type: 'text',
-    content: 'Synthwave dos anos 80, Lofi hip-hop e trilhas sonoras de videogames clássicos acompanhando cada commit.',
-    description: 'Playlist & Inspiração Sonora'
+    content: `======================================================================
+MINHAS-MUSICAS.TXT - BLOCO DE NOTAS DO CAIO
+======================================================================
+
+PERFIL MUSICAL:   100% Eclético | Sem rótulos ou preconceitos
+LEMA:             "Música boa é música que toca a alma e inspira código"
+PRESENÇA:         Fone de ouvido ligado o dia inteiro no setup
+PROJETO REAL:     Criador do IGCG Music (plataforma completa de áudio)
+
+----------------------------------------------------------------------
+[1] MEU GOSTO MUSICAL & RELAÇÃO COM A MÚSICA
+----------------------------------------------------------------------
+Se tem uma coisa que define o que ouço, é a diversidade. A IA inventou
+que eu só ouvia 'Synthwave e Lofi', mas a verdade é que no meu dia a dia
+o repertório vai de um extremo ao outro com total naturalidade:
+
+  > Pop Nacional & Internacional: refrões marcantes, produções modernas
+  > Sertanejo (raiz ao universitário): clássicos de estrada e modões
+  > Rap & Hip Hop: ritmo, rimas inteligentes e foco no flow
+  > Funk: batidas contagiantes para dar aquela acelerada no ritmo
+  > Pop Rock & Classic Rock: guitarras marcantes e energia para debugs
+  > Country: violões acústicos, melodias autênticas e storytelling
+  > Gospel & Hinos: paz, adoração profunda e renovação de forças
+  > Trilhas Sonoras de Games & Animes: nostalgia pura da infância
+
+Essa paixão por música não fica só nos fones de ouvido: me levou a
+desenvolver soluções reais de tecnologia musical, como o IGCG Music
+(web rádio e catálogo) e o Hinário EAV (app mobile na Play Store).
+
+----------------------------------------------------------------------
+[2] TOP MÚSICAS & ARTISTAS FAVORITOS
+----------------------------------------------------------------------
+Algumas das faixas que estão sempre no repeat ou marcadas no Winamp:
+
+[ GOSPEL & ADORAÇÃO ]
+  * My Prayer - Editora Árvore da Vida
+  * Anelo por Tua Presença - Editora Árvore da Vida
+  * Hinos Clássicos & Cânticos Espirituais
+
+[ POP & INTERNACIONAL ]
+  * M83 - Midnight City
+  * Crusher-P - Echo
+  * The Weeknd / Bruno Mars / Coldplay
+
+[ ROCK & POP ROCK ]
+  * Legião Urbana / Capital Inicial / Charlie Brown Jr.
+  * Queen / Linkin Park / Bon Jovi
+
+[ SERTANEJO & BRASIL ]
+  * Jorge & Mateus / Henrique & Juliano / Chitãozinho & Xororó
+  * Clássicos sertanejos dos anos 90 e 2000
+
+----------------------------------------------------------------------
+[3] WINAMP 2.91 NO WINDOWS XP
+----------------------------------------------------------------------
+Abra o ícone do Winamp na Área de Trabalho para ouvir faixas reais
+tocando direto pelo nosso player retrô de alta fidelidade com visualizer
+de espectro e equalizador de 10 bandas!`,
+    description: 'Gosto Musical Eclético & Inspiração'
   },
   {
     id: 'open-source',

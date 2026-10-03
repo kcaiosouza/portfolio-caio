@@ -281,6 +281,26 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
               <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Mensagens instantâneas</span>
             </div>
           </button>
+
+          <button
+            type="button"
+            data-testid="start-menu-winamp"
+            onClick={() => {
+              openWindow('winamp-window');
+              onClose();
+            }}
+            className="flex items-center gap-2.5 p-2 rounded hover:bg-[#245EDC] hover:text-white text-gray-800 text-left transition-colors group"
+          >
+            <div className="w-5 h-5 rounded-[2px] bg-[#1E202B] border border-gray-600 flex items-center justify-center flex-shrink-0 shadow-xs">
+              <svg className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </div>
+            <div className="leading-tight">
+              <span className="font-semibold block">Winamp</span>
+              <span className="text-[10px] text-gray-500 group-hover:text-blue-100 block">Reprodutor de áudio clássico</span>
+            </div>
+          </button>
         </div>
 
         {/* Coluna direita: links sociais */}

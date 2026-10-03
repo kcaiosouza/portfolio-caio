@@ -288,6 +288,14 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({
             <path d="M11 20C11 16.5 13.5 15 16 15C18.5 15 21 16.5 21 20" fill="#0078D7" />
           </svg>
         );
+      case 'winamp':
+        return (
+          <div className="w-4 h-4 rounded-[2px] bg-[#1E202B] border border-gray-600 flex items-center justify-center flex-shrink-0 shadow-xs">
+            <svg className="w-3 h-3 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
+        );
       case 'folder':
       default:
         return (

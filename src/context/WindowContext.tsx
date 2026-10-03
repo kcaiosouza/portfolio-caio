@@ -144,7 +144,7 @@ const DEFAULT_WINDOWS: WindowItem[] = [
   },
   {
     id: 'hobby-musica-window',
-    title: 'Musica_e_Lofi.txt - Bloco de notas',
+    title: 'Minhas_Musicas.txt - Bloco de notas',
     icon: 'notepad',
     isOpen: false,
     isMinimized: false,
@@ -229,6 +229,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 260, y: 70, width: 490, height: 470 },
     defaultPosition: { x: 260, y: 70, width: 490, height: 470 }
+  },
+  {
+    id: 'winamp-window',
+    title: 'Winamp',
+    icon: 'winamp',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: false,
+    zIndex: 10,
+    position: { x: 300, y: 70, width: 275, height: 464 },
+    defaultPosition: { x: 300, y: 70, width: 275, height: 464 }
   }
 ];
 

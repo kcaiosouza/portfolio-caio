@@ -38,6 +38,14 @@ export const DesktopIcon: React.FC<DesktopIconProps> = ({ item }) => {
             <path d="M11 20C11 16 13.5 14.5 16 14.5C21 16 21 20 21 20" fill="#0091EA" />
           </svg>
         );
+      case 'winamp':
+        return (
+          <div className="w-9 h-9 rounded-md bg-gradient-to-b from-[#2F3142] to-[#12131C] border border-[#52556E] flex items-center justify-center drop-shadow-md" data-testid="icon-winamp">
+            <svg className="w-6 h-6 text-yellow-400 fill-yellow-400 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" viewBox="0 0 24 24">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
+        );
       default:
         return <FileText className="w-9 h-9 text-white drop-shadow-md" />;
     }

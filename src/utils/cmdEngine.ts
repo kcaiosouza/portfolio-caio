@@ -149,6 +149,12 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
       ctx.openWindow('msn-window');
       return { output: ['Iniciando MSN Messenger 7.5...'] };
 
+    case 'winamp':
+    case 'music':
+    case 'player':
+      ctx.openWindow('winamp-window');
+      return { output: ['Iniciando Winamp 2.91... "It really whips the llama\'s ass!"'] };
+
     case 'explorer':
       if (args.toLowerCase().includes('hobb')) {
         ctx.openWindow('hobbies-window');
