@@ -4,7 +4,7 @@ import { soundEngine } from '../utils/soundEffects';
 
 describe('Data and Sound Tests', () => {
   it('should contain complete portfolio data for Caio', () => {
-    expect(PORTFOLIO_DATA.name).toBe('Dev Caio');
+    expect(PORTFOLIO_DATA.name).toBe('Caio Souza');
     expect(PORTFOLIO_DATA.yearsOfExperience).toBeGreaterThanOrEqual(8);
     expect(PORTFOLIO_DATA.skills).toContain('React');
     expect(PORTFOLIO_DATA.skills).toContain('Next.js');
