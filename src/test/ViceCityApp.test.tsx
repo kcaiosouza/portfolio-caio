@@ -78,4 +78,18 @@ describe('ViceCityApp Component & Hobbies Integration', () => {
     expect(openWindowMock).toHaveBeenCalledWith('vice-city-window');
     expect(resVc.output[0]).toContain('Vice City');
   });
+
+  it('closes window when receiving quit-game postMessage', () => {
+    const closeMock = vi.fn();
+    render(
+      <SystemProvider>
+        <WindowProvider>
+          <ViceCityApp isOpen={true} onClose={closeMock} />
+        </WindowProvider>
+      </SystemProvider>
+    );
+
+    window.dispatchEvent(new MessageEvent('message', { data: 'quit-game' }));
+    expect(closeMock).toHaveBeenCalledTimes(1);
+  });
 });

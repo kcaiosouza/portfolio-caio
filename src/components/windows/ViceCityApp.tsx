@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { WindowFrame } from './WindowFrame';
+import { useWindowManager } from '../../context/WindowContext';
 
 export interface ViceCityAppProps {
   id?: string;
@@ -12,13 +13,40 @@ export const ViceCityApp: React.FC<ViceCityAppProps> = ({
   isOpen,
   onClose,
 }) => {
+  let wm: ReturnType<typeof useWindowManager> | undefined;
+  try {
+    wm = useWindowManager();
+  } catch {
+    wm = undefined;
+  }
+
+  const handleClose = onClose || (() => wm?.closeWindow(id));
+
+  // Escuta mensagens vindas do iframe (postMessage de saída)
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (
+        e.data === 'quit-game' ||
+        e.data === 'close-window' ||
+        e.data?.type === 'quit-game' ||
+        e.data?.action === 'quit' ||
+        e.data?.event === 'quit'
+      ) {
+        handleClose();
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [handleClose]);
+
   return (
     <WindowFrame
       id={id}
       title="Grand Theft Auto: Vice City"
       icon="vice-city"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handleClose}
       initialPosition={{ x: 30, y: 15, width: 1024, height: 720 }}
     >
       <div
