@@ -61,4 +61,17 @@ describe('CmdApp', () => {
 
     expect(screen.queryByText(/Versão 5.1.2600/i)).not.toBeInTheDocument();
   });
+
+  it('rejects secret game when locked and executes lock command in CmdApp', () => {
+    renderCmd();
+    const input = screen.getByRole('textbox', { name: /prompt-input/i });
+
+    fireEvent.change(input, { target: { value: 'minecraft' } });
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+    expect(screen.getByText(/'minecraft' não é reconhecido como um comando interno/i)).toBeInTheDocument();
+
+    fireEvent.change(input, { target: { value: 'lock' } });
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+    expect(screen.getByText(/Jogos secretos bloqueados com sucesso\./i)).toBeInTheDocument();
+  });
 });

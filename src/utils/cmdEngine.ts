@@ -4,6 +4,9 @@ export interface CommandContext {
   setScreenMode: (mode: 'bios' | 'login' | 'desktop') => void;
   openBrowser?: (url?: string) => void;
   openMobileApp?: (url?: string) => void;
+  isSecretUnlocked?: boolean;
+  lockSecretGames?: () => void;
+  unlockSecretGames?: () => void;
 }
 
 export interface CommandResult {
@@ -45,8 +48,12 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
           '  TASKMGR               Abre o Gerenciador de Tarefas do Windows.',
           '  WINMINE / MINESWEEPER Abre o jogo Campo Minado.',
           '  SPIDER / SOLITAIRE    Abre o jogo Paciência Spider.',
-          '  MINECRAFT             Abre o jogo Minecraft Classic.',
-          '  GTA / VICECITY        Abre o jogo Grand Theft Auto: Vice City.',
+          ...(ctx.isSecretUnlocked
+            ? [
+                '  MINECRAFT             Abre o jogo Minecraft Classic.',
+                '  GTA / VICECITY        Abre o jogo Grand Theft Auto: Vice City.',
+              ]
+            : []),
           '  MSN / MESSENGER       Abre o MSN Messenger 7.5.',
           '  EXPLORER [pasta]      Abre o Windows Explorer (projetos ou hobbies).',
           '  IEXPLORE [url]        Abre o navegador Internet Explorer.',
@@ -136,6 +143,15 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
     case 'minecraft':
     case 'mc':
     case 'craft':
+      if (!ctx.isSecretUnlocked) {
+        return {
+          output: [
+            `'${command}' não é reconhecido como um comando interno ou externo,`,
+            'um programa operável ou um arquivo em lotes.',
+            "Digite 'help' para ver os comandos disponíveis."
+          ]
+        };
+      }
       ctx.openWindow('minecraft-window');
       return {
         output: [
@@ -147,11 +163,30 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
     case 'gta':
     case 'vicecity':
     case 'vice-city':
+      if (!ctx.isSecretUnlocked) {
+        return {
+          output: [
+            `'${command}' não é reconhecido como um comando interno ou externo,`,
+            'um programa operável ou um arquivo em lotes.',
+            "Digite 'help' para ver os comandos disponíveis."
+          ]
+        };
+      }
       ctx.openWindow('vice-city-window');
       return {
         output: [
           'Iniciando Grand Theft Auto: Vice City...',
           'Dica: Carregamento WebAssembly direto pelo navegador.'
+        ]
+      };
+
+    case 'lock':
+    case 'resetgames':
+      ctx.lockSecretGames?.();
+      return {
+        output: [
+          'Jogos secretos bloqueados com sucesso.',
+          'Digite o código secreto para liberar novamente.'
         ]
       };
 

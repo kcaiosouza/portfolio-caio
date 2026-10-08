@@ -15,7 +15,7 @@ interface CmdAppProps {
 
 export const CmdApp: React.FC<CmdAppProps> = ({ isOpen }) => {
   const { openWindow, closeWindow, openBrowser, openMobileApp } = useWindowManager();
-  const { setScreenMode } = useSystem();
+  const { setScreenMode, isSecretUnlocked, lockSecretGames, unlockSecretGames } = useSystem();
 
   const [history, setHistory] = useState<CmdHistoryEntry[]>([
     { output: CMD_BANNER }
@@ -53,7 +53,10 @@ export const CmdApp: React.FC<CmdAppProps> = ({ isOpen }) => {
         closeWindow,
         setScreenMode,
         openBrowser,
-        openMobileApp
+        openMobileApp,
+        isSecretUnlocked,
+        lockSecretGames,
+        unlockSecretGames
       });
 
       if (result.clear) {

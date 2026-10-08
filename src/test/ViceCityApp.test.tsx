@@ -68,6 +68,7 @@ describe('ViceCityApp Component & Hobbies Integration', () => {
       openWindow: openWindowMock,
       closeWindow: vi.fn(),
       setScreenMode: vi.fn(),
+      isSecretUnlocked: true,
     };
 
     const resGta = executeCommand('gta', ctx);
