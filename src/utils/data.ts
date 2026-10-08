@@ -172,6 +172,14 @@ de espectro e equalizador de 10 bandas!`,
     content: 'https://classic.minecraft.net/',
     description: 'Versão clássica original de Minecraft (0.0.23a_01) jogável diretamente no navegador.',
     windowId: 'minecraft-window'
+  },
+  {
+    id: 'vice-city',
+    title: 'GTA_Vice_City.exe',
+    type: 'game',
+    content: 'https://vc.quenq.com',
+    description: 'Grand Theft Auto: Vice City (2002) - Edição completa de 1986 Miami jogável diretamente no navegador.',
+    windowId: 'vice-city-window'
   }
 ];
 

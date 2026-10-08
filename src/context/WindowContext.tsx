@@ -240,6 +240,17 @@ const DEFAULT_WINDOWS: WindowItem[] = [
     zIndex: 10,
     position: { x: 300, y: 70, width: 275, height: 464 },
     defaultPosition: { x: 300, y: 70, width: 275, height: 464 }
+  },
+  {
+    id: 'vice-city-window',
+    title: 'Grand Theft Auto: Vice City',
+    icon: 'vice-city',
+    isOpen: false,
+    isMinimized: false,
+    isMaximized: true,
+    zIndex: 10,
+    position: { x: 30, y: 15, width: 1024, height: 720 },
+    defaultPosition: { x: 30, y: 15, width: 1024, height: 720 }
   }
 ];
 

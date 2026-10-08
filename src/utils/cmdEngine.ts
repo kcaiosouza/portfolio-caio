@@ -46,6 +46,7 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
           '  WINMINE / MINESWEEPER Abre o jogo Campo Minado.',
           '  SPIDER / SOLITAIRE    Abre o jogo Paciência Spider.',
           '  MINECRAFT             Abre o jogo Minecraft Classic.',
+          '  GTA / VICECITY        Abre o jogo Grand Theft Auto: Vice City.',
           '  MSN / MESSENGER       Abre o MSN Messenger 7.5.',
           '  EXPLORER [pasta]      Abre o Windows Explorer (projetos ou hobbies).',
           '  IEXPLORE [url]        Abre o navegador Internet Explorer.',
@@ -140,6 +141,17 @@ export function executeCommand(rawInput: string, ctx: CommandContext): CommandRe
         output: [
           'Iniciando Minecraft Classic...',
           'Dica: Clique na tela para capturar o mouse. Pressione Esc para liberar.'
+        ]
+      };
+
+    case 'gta':
+    case 'vicecity':
+    case 'vice-city':
+      ctx.openWindow('vice-city-window');
+      return {
+        output: [
+          'Iniciando Grand Theft Auto: Vice City...',
+          'Dica: Carregamento WebAssembly direto pelo navegador.'
         ]
       };
 

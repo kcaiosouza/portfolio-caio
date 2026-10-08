@@ -212,11 +212,24 @@ export const ExplorerFolderContent: React.FC = () => {
                   )}
                   {selectedHobby.type === 'game' && (
                     <div className="mt-2 border border-gray-300 rounded p-2 flex items-center justify-center bg-black/10">
-                      <img
-                        src="/assets/minecraft-icon.webp"
-                        alt={selectedHobby.title}
-                        className="w-16 h-16 object-contain drop-shadow"
-                      />
+                      {selectedHobby.id === 'vice-city' ? (
+                        <div className="w-16 h-16 rounded-[6px] bg-gradient-to-br from-[#FF1493] via-[#7B1FA2] to-[#00E5FF] p-1 flex items-center justify-center drop-shadow-lg">
+                          <svg viewBox="0 0 24 24" className="w-12 h-12" fill="none">
+                            <circle cx="12" cy="11" r="5" fill="#FFE600" />
+                            <path d="M12 21C12 16 11 14 10 11" stroke="#220033" strokeWidth="1.8" strokeLinecap="round" />
+                            <path d="M10 11C8 9 5 10 4 11C6 8 8 8 10 11Z" fill="#00FFCC" />
+                            <path d="M10 11C9 8 10 6 12 5C11 7 11 9 10 11Z" fill="#00FFCC" />
+                            <path d="M10 11C12 9 15 8 17 9C15 7 12 8 10 11Z" fill="#00FFCC" />
+                            <path d="M10 11C13 11 16 13 18 15C15 13 12 12 10 11Z" fill="#00FFCC" />
+                          </svg>
+                        </div>
+                      ) : (
+                        <img
+                          src="/assets/minecraft-icon.webp"
+                          alt={selectedHobby.title}
+                          className="w-16 h-16 object-contain drop-shadow"
+                        />
+                      )}
                     </div>
                   )}
                   <button
@@ -264,7 +277,18 @@ export const ExplorerFolderContent: React.FC = () => {
                 >
                   {/* File Icon */}
                   <div className="w-12 h-12 flex items-center justify-center mb-1">
-                    {hobby.type === 'game' ? (
+                    {hobby.id === 'vice-city' ? (
+                      <div className="w-10 h-10 rounded-[4px] bg-gradient-to-br from-[#FF1493] via-[#7B1FA2] to-[#00E5FF] p-1 flex items-center justify-center drop-shadow-md">
+                        <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none">
+                          <circle cx="12" cy="11" r="5" fill="#FFE600" />
+                          <path d="M12 21C12 16 11 14 10 11" stroke="#220033" strokeWidth="1.8" strokeLinecap="round" />
+                          <path d="M10 11C8 9 5 10 4 11C6 8 8 8 10 11Z" fill="#00FFCC" />
+                          <path d="M10 11C9 8 10 6 12 5C11 7 11 9 10 11Z" fill="#00FFCC" />
+                          <path d="M10 11C12 9 15 8 17 9C15 7 12 8 10 11Z" fill="#00FFCC" />
+                          <path d="M10 11C13 11 16 13 18 15C15 13 12 12 10 11Z" fill="#00FFCC" />
+                        </svg>
+                      </div>
+                    ) : hobby.type === 'game' ? (
                       <img
                         src="/assets/minecraft-icon.webp"
                         alt={hobby.title}

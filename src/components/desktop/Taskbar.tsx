@@ -86,6 +86,19 @@ export const Taskbar: React.FC = () => {
             </svg>
           </div>
         );
+      case 'vice-city':
+        return (
+          <div className="w-3.5 h-3.5 rounded-[2px] bg-gradient-to-br from-[#FF1493] via-[#7B1FA2] to-[#00E5FF] p-[0.5px] flex items-center justify-center flex-shrink-0">
+            <svg viewBox="0 0 24 24" className="w-2.5 h-2.5" fill="none">
+              <circle cx="12" cy="11" r="5" fill="#FFE600" />
+              <path d="M12 21C12 16 11 14 10 11" stroke="#220033" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M10 11C8 9 5 10 4 11C6 8 8 8 10 11Z" fill="#00FFCC" />
+              <path d="M10 11C9 8 10 6 12 5C11 7 11 9 10 11Z" fill="#00FFCC" />
+              <path d="M10 11C12 9 15 8 17 9C15 7 12 8 10 11Z" fill="#00FFCC" />
+              <path d="M10 11C13 11 16 13 18 15C15 13 12 12 10 11Z" fill="#00FFCC" />
+            </svg>
+          </div>
+        );
       default:
         return <FileText className="w-3.5 h-3.5 text-white flex-shrink-0" />;
     }
