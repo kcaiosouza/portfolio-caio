@@ -177,7 +177,7 @@ de espectro e equalizador de 10 bandas!`,
     id: 'vice-city',
     title: 'GTA_Vice_City.exe',
     type: 'game',
-    content: 'https://vc.quenq.com',
+    content: '/apps/vice-city/index.html',
     description: 'Grand Theft Auto: Vice City (2002) - Edição completa de 1986 Miami jogável diretamente no navegador.',
     windowId: 'vice-city-window'
   }

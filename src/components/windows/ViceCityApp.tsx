@@ -54,7 +54,7 @@ export const ViceCityApp: React.FC<ViceCityAppProps> = ({
         className="w-full h-full bg-[#171c20] select-none overflow-hidden flex flex-col"
       >
         <iframe
-          src="https://vc.quenq.com"
+          src="/apps/vice-city/index.html"
           title="GTA Vice City Online"
           data-testid="vice-city-iframe"
           className="w-full h-full border-none"

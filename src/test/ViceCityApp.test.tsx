@@ -13,11 +13,11 @@ describe('ViceCityApp Component & Hobbies Integration', () => {
     expect(vc).toBeDefined();
     expect(vc?.title).toBe('GTA_Vice_City.exe');
     expect(vc?.type).toBe('game');
-    expect(vc?.content).toBe('https://vc.quenq.com');
+    expect(vc?.content).toBe('/apps/vice-city/index.html');
     expect(vc?.windowId).toBe('vice-city-window');
   });
 
-  it('renders iframe with https://vc.quenq.com and permissions when open', () => {
+  it('renders iframe with /apps/vice-city/index.html and permissions when open', () => {
     render(
       <SystemProvider>
         <WindowProvider>
@@ -28,7 +28,7 @@ describe('ViceCityApp Component & Hobbies Integration', () => {
 
     const iframe = screen.getByTestId('vice-city-iframe');
     expect(iframe).toBeInTheDocument();
-    expect(iframe).toHaveAttribute('src', 'https://vc.quenq.com');
+    expect(iframe).toHaveAttribute('src', '/apps/vice-city/index.html');
     expect(iframe).toHaveAttribute('title', 'GTA Vice City Online');
 
     const allow = iframe.getAttribute('allow') || '';
