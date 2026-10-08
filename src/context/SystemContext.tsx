@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ScreenMode } from '../types';
 import { soundEngine } from '../utils/soundEffects';
+import { playXpErrorSound } from '../utils/audioEffects';
 
 interface SystemContextType {
   screenMode: ScreenMode;
@@ -12,6 +13,11 @@ interface SystemContextType {
   isMobileVga: boolean;
   setDismissMobileVga: (dismiss: boolean) => void;
   dismissMobileVga: boolean;
+  isSecretUnlocked: boolean;
+  showSecretModal: boolean;
+  unlockSecretGames: () => void;
+  lockSecretGames: () => void;
+  closeSecretModal: () => void;
 }
 
 const SystemContext = createContext<SystemContextType | undefined>(undefined);
@@ -29,6 +35,14 @@ export const SystemProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isMuted, setIsMuted] = useState<boolean>(soundEngine.isMuted());
   const [isMobileVga, setIsMobileVga] = useState<boolean>(false);
   const [dismissMobileVga, setDismissMobileVga] = useState<boolean>(false);
+  const [isSecretUnlocked, setIsSecretUnlocked] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('caio_xp_secret_games_unlocked') === 'true';
+    } catch {
+      return false;
+    }
+  });
+  const [showSecretModal, setShowSecretModal] = useState<boolean>(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -57,6 +71,31 @@ export const SystemProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setIsMuted(next);
   };
 
+  const unlockSecretGames = () => {
+    setIsSecretUnlocked(true);
+    try {
+      localStorage.setItem('caio_xp_secret_games_unlocked', 'true');
+    } catch {
+      // storage disabled fallback
+    }
+    playXpErrorSound();
+    setShowSecretModal(true);
+  };
+
+  const lockSecretGames = () => {
+    setIsSecretUnlocked(false);
+    try {
+      localStorage.setItem('caio_xp_secret_games_unlocked', 'false');
+    } catch {
+      // storage disabled fallback
+    }
+    setShowSecretModal(false);
+  };
+
+  const closeSecretModal = () => {
+    setShowSecretModal(false);
+  };
+
   return (
     <SystemContext.Provider
       value={{
@@ -69,6 +108,11 @@ export const SystemProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         isMobileVga,
         dismissMobileVga,
         setDismissMobileVga,
+        isSecretUnlocked,
+        showSecretModal,
+        unlockSecretGames,
+        lockSecretGames,
+        closeSecretModal,
       }}
     >
       {children}

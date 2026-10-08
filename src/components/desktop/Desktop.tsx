@@ -20,8 +20,15 @@ import { MsnContactListApp } from '../windows/msn/MsnContactListApp';
 import { MsnChatApp } from '../windows/msn/MsnChatApp';
 import { WinampApp } from '../windows/winamp/WinampApp';
 import { ViceCityApp } from '../windows/ViceCityApp';
+import { useSystem } from '../../context/SystemContext';
+import { useKonamiCode } from '../../hooks/useKonamiCode';
+import { SecretErrorDialog } from '../modals/SecretErrorDialog';
 
 export const Desktop: React.FC = () => {
+  const { unlockSecretGames, showSecretModal, closeSecretModal } = useSystem();
+
+  useKonamiCode(unlockSecretGames);
+
   return (
     <div
       role="region"
@@ -91,6 +98,9 @@ export const Desktop: React.FC = () => {
 
         {/* Cachorrinho Ajudante do Windows XP */}
         <PuppyAssistant />
+
+        {/* Diálogo de Erro do Código Secreto */}
+        <SecretErrorDialog isOpen={showSecretModal} onClose={closeSecretModal} />
       </div>
 
       {/* Barra de Tarefas */}
