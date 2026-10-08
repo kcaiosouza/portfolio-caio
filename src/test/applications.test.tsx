@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { WindowProvider, useWindowManager } from '../context/WindowContext';
+import { SystemProvider } from '../context/SystemContext';
 import { PORTFOLIO_DATA, HOBBIES_ITEMS, TRASH_ITEMS } from '../utils/data';
 import { soundEngine } from '../utils/soundEffects';
 
@@ -13,6 +14,7 @@ import RecycleBinApp, { RecycleBinContent } from '../components/windows/RecycleB
 describe('Windows XP Portfolio Applications', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   // --------------------------------------------------------------------------
@@ -152,7 +154,12 @@ describe('Windows XP Portfolio Applications', () => {
     });
 
     it('renders all hobbies items from HOBBIES_ITEMS', () => {
-      render(<ExplorerFolderContent />);
+      localStorage.setItem('caio_xp_secret_games_unlocked', 'true');
+      render(
+        <SystemProvider>
+          <ExplorerFolderContent />
+        </SystemProvider>
+      );
 
       HOBBIES_ITEMS.forEach(hobby => {
         expect(screen.getAllByText(hobby.title)[0]).toBeInTheDocument();

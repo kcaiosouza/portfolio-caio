@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import WindowFrame from './WindowFrame';
 import { HOBBIES_ITEMS } from '../../utils/data';
 import { HobbyItem } from '../../types';
 import { soundEngine } from '../../utils/soundEffects';
 import { useWindowManager } from '../../context/WindowContext';
+import { useSystem } from '../../context/SystemContext';
 
 export interface ExplorerFolderAppProps {
   id?: string;
@@ -21,7 +22,27 @@ export const ExplorerFolderContent: React.FC = () => {
     wm = undefined;
   }
 
-  const [selectedHobby, setSelectedHobby] = useState<HobbyItem | null>(HOBBIES_ITEMS[0]);
+  let isSecretUnlocked = false;
+  try {
+    const sys = useSystem();
+    isSecretUnlocked = sys.isSecretUnlocked;
+  } catch {
+    // fallback if rendered outside SystemProvider
+    isSecretUnlocked = false;
+  }
+
+  const visibleHobbies = useMemo(() => {
+    if (isSecretUnlocked) return HOBBIES_ITEMS;
+    return HOBBIES_ITEMS.filter(h => h.id !== 'minecraft' && h.id !== 'vice-city');
+  }, [isSecretUnlocked]);
+
+  const [selectedHobby, setSelectedHobby] = useState<HobbyItem | null>(() => visibleHobbies[0] || null);
+
+  useEffect(() => {
+    if (selectedHobby && !visibleHobbies.some(h => h.id === selectedHobby.id)) {
+      setSelectedHobby(visibleHobbies[0] || null);
+    }
+  }, [visibleHobbies, selectedHobby]);
 
   const handleSelectHobby = (hobby: HobbyItem) => {
     soundEngine.playClick();
@@ -254,7 +275,7 @@ export const ExplorerFolderContent: React.FC = () => {
           onClick={() => setSelectedHobby(null)}
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {HOBBIES_ITEMS.map(hobby => {
+            {visibleHobbies.map(hobby => {
               const isSelected = selectedHobby?.id === hobby.id;
 
               return (
@@ -331,7 +352,7 @@ export const ExplorerFolderContent: React.FC = () => {
         className="flex items-center justify-between px-3 py-0.5 bg-[#ECE9D8] border-t border-[#ACA899] text-[11px] text-gray-700 shadow-[inset_0_1px_0_#FFF]"
       >
         <span>
-          {selectedHobby ? '1 objeto selecionado' : `${HOBBIES_ITEMS.length} objeto(s)`}
+          {selectedHobby ? '1 objeto selecionado' : `${visibleHobbies.length} objeto(s)`}
         </span>
         <span>Meu Computador</span>
       </div>
